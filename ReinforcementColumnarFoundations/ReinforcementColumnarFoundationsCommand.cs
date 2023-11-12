@@ -2,6 +2,7 @@
 using Autodesk.Revit.DB.Structure;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
+using ReinforcementColumnarFoundations.ViewModels;
 using ReinforcementColumnarFoundations.Views.Windows;
 using System;
 using System.Collections.Generic;

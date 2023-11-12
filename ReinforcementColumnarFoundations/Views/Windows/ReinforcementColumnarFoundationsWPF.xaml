@@ -7,7 +7,7 @@
              xmlns:vm="clr-namespace:ReinforcementColumnarFoundations.ViewModels"
              Title="{Binding Path=Title}" Height="800" Width="800"
              MinHeight="800" MinWidth="800"
-             WindowStyle="SingleBorderWindow" ResizeMode="NoResize"   WindowStartupLocation="CenterScreen" Icon="/ReinforcementColumnarFoundations;component/Resources/logoRAM.ico" >
+             WindowStyle="SingleBorderWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/ReinforcementColumnarFoundations;component/Resources/logoRAM.ico">
     <Window.DataContext>
         <vm:ReinforcementColumnarFoundationsViewModel/>
     </Window.DataContext>
@@ -35,7 +35,7 @@
                         </Button>
 
 
-                        <ComboBox x:Name="comboBox_FirstBarTapes" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" Width="100" Height="25" VerticalContentAlignment="Center" Margin="30,10,0,0"></ComboBox>
+                        <ComboBox x:Name="comboBox_FirstBarTapes" HorizontalAlignment="Left"  Grid.Row="1" VerticalAlignment="Top" Width="100" Height="25" VerticalContentAlignment="Center" Margin="30,10,0,0"></ComboBox>
                         <ComboBox x:Name="comboBox_SecondBarTapes" HorizontalAlignment="Right" Grid.Row="1" VerticalAlignment="Top" Width="100" Height="25" VerticalContentAlignment="Center" Margin="0,170,10,0"></ComboBox>
                         <ComboBox x:Name="comboBox_BottomBarTapes" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="100" Height="25" Grid.Column="0" Grid.Row="1" Margin="10,0,0,130"></ComboBox>
                         <ComboBox x:Name="comboBox_IndirectBarTapes" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="25" Grid.Column="0" Grid.Row="1" Margin="30,262,0,0"></ComboBox>
@@ -47,7 +47,6 @@
                         <TextBox x:Name="textBox_StepIndirectRebar" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Grid.Row="1" Width="40" Height="25" Margin="100,205,0,0" TextWrapping="Wrap" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></TextBox>
 
                         <Image x:Name="image_Sections" VerticalAlignment="Top" HorizontalAlignment="Center" RenderOptions.BitmapScalingMode="Fant" Grid.Row="1" Source="/ReinforcementColumnarFoundations;component/Resources/Надколонник_Армирование.png" Margin="110,10,105,0"/>
-
                     </Grid>
                 </Grid>
             </TabItem>
@@ -97,6 +96,6 @@
             </TabItem>
         </TabControl>
         <Button x:Name="btn_Ok" Content="Ок" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,125,10" Width="100" Height="25" Click="btn_Ok_Click" Grid.Row="1"/>
-        <Button x:Name="btn_Cancel" Content="Отмена" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Width="100" Height="25" Click="btn_Cancel_Click" Grid.Row="1"/>
+        <Button x:Name="btn_Cancel" Command="{Binding CloseApplicationCommand}" Content="Отмена" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Width="100" Height="25" Grid.Row="1"/>
     </Grid>
 </Window>
