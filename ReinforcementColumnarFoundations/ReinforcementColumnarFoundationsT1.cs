@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Common;
 using ReinforcementColumnarFoundations.Views.Windows;
+using System.Windows.Documents;
 
 namespace ReinforcementColumnarFoundations
 {
@@ -251,12 +252,12 @@ namespace ReinforcementColumnarFoundations
                     //Создание хомутов
                     try
                     {
-                        //Точки для построения кривых стержня хомута
-                        XYZ firstStirrup_p1 = new XYZ(Math.Round(foundationProperty.FoundationBasePoint.X - foundationProperty.ColumnLength / 2 + coverDistance, 6)
-                            , Math.Round(foundationProperty.FoundationBasePoint.Y, 6)
+                        //Точки для построения кривых хомута
+                        XYZ firstStirrup_p1 = new XYZ(Math.Round(foundationProperty.FoundationBasePoint.X - 200 / 304.8, 6)
+                            , Math.Round(foundationProperty.FoundationBasePoint.Y - 200 / 304.8, 6)
                             , Math.Round(foundationProperty.FoundationBasePoint.Z + foundationProperty.FoundationLength - 50 / 304.8, 6));
 
-                        XYZ firstStirrup_p2 = new XYZ(Math.Round(firstStirrup_p1.X + 200 / 304.8, 6)
+                        XYZ firstStirrup_p2 = new XYZ(Math.Round(firstStirrup_p1.X + 400 / 304.8, 6)
                             , Math.Round(firstStirrup_p1.Y, 6)
                             , Math.Round(firstStirrup_p1.Z, 6));
 
@@ -264,7 +265,7 @@ namespace ReinforcementColumnarFoundations
                             , Math.Round(firstStirrup_p2.Y + 200 / 304.8, 6)
                             , Math.Round(firstStirrup_p2.Z, 6));
 
-                        XYZ firstStirrup_p4 = new XYZ(Math.Round(firstStirrup_p3.X - 200 / 304.8, 6)
+                        XYZ firstStirrup_p4 = new XYZ(Math.Round(firstStirrup_p3.X - 400 / 304.8, 6)
                             , Math.Round(firstStirrup_p3.Y, 6)
                             , Math.Round(firstStirrup_p3.Z, 6));
 
@@ -280,8 +281,7 @@ namespace ReinforcementColumnarFoundations
                         Curve firstStirrup_line4 = Line.CreateBound(firstStirrup_p4, firstStirrup_p1) as Curve;
                         firstStirrupCurves.Add(firstStirrup_line4);
 
-                        //Построение нижнего хомута
-                        //Rebar buttonStirrup = null;
+
                         Rebar buttonStirrup = Rebar.CreateFromCurvesAndShape(doc
                             , form51
                             , firstStirrupBarTape
@@ -291,7 +291,7 @@ namespace ReinforcementColumnarFoundations
                             , new XYZ(0, 0, 1)
                             , firstStirrupCurves
                             , RebarHookOrientation.Right
-                            , RebarHookOrientation.Right); ;
+                            , RebarHookOrientation.Right);
                     }
                     catch
                     {
