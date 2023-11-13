@@ -270,14 +270,14 @@ namespace ReinforcementColumnarFoundations
                         firstStirrupCurves.Add(firstStirrup_line4);
 
                         //Построение нижнего хомута
-                        Rebar buttonStirrup = null;
-                        buttonStirrup = Rebar.CreateFromCurvesAndShape(doc
+                        //Rebar buttonStirrup = null;
+                        Rebar buttonStirrup = Rebar.CreateFromCurvesAndShape(doc
                             , form51
                             , firstStirrupBarTape
                             , rebarHookTypeForStirrup
                             , rebarHookTypeForStirrup
                             , foundation
-                            , new XYZ(0, 0, 1)
+                            , XYZ.BasisX
                             , firstStirrupCurves
                             , RebarHookOrientation.Right
                             , RebarHookOrientation.Right);
