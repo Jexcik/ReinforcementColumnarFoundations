@@ -248,6 +248,45 @@ namespace ReinforcementColumnarFoundations
                         TaskDialog.Show("Revit", "Не удалось создать косвенное армирование!");
                         return Result.Cancelled;
                     }
+                    //Создание хомутов
+                    try
+                    {
+                        //Точки для построения кривых стержня хомута
+                        XYZ firstStirrup_p1 = new XYZ(Math.Round(foundationProperty.FoundationBasePoint.X, 6), Math.Round(foundationProperty.FoundationBasePoint.Y, 6), Math.Round(foundationProperty.FoundationBasePoint.Z, 6));
+                        XYZ firstStirrup_p2 = new XYZ(Math.Round(firstStirrup_p1.X + 200 / 304.8, 6), Math.Round(firstStirrup_p1.Y, 6), Math.Round(firstStirrup_p1.Z, 6));
+                        XYZ firstStirrup_p3 = new XYZ(Math.Round(firstStirrup_p2.X,6), Math.Round(firstStirrup_p2.Y + 200 / 304.8, 6), Math.Round(firstStirrup_p2.Z, 6));
+                        XYZ firstStirrup_p4 = new XYZ(Math.Round(firstStirrup_p3.X - 200 / 304.8, 6), Math.Round(firstStirrup_p3.Y, 6), Math.Round(firstStirrup_p3.Z,6));
+
+                        //Кривые хомута
+                        List<Curve> firstStirrupCurves = new List<Curve>();
+
+                        Curve firstStirrup_line1 = Line.CreateBound(firstStirrup_p1, firstStirrup_p2) as Curve;
+                        firstStirrupCurves.Add(firstStirrup_line1);
+                        Curve firstStirrup_line2 = Line.CreateBound(firstStirrup_p2, firstStirrup_p3) as Curve;
+                        firstStirrupCurves.Add(firstStirrup_line2);
+                        Curve firstStirrup_line3 = Line.CreateBound(firstStirrup_p3, firstStirrup_p4) as Curve;
+                        firstStirrupCurves.Add(firstStirrup_line3);
+                        Curve firstStirrup_line4 = Line.CreateBound(firstStirrup_p4, firstStirrup_p1) as Curve;
+                        firstStirrupCurves.Add(firstStirrup_line4);
+
+                        //Построение нижнего хомута
+                        Rebar buttonStirrup = null;
+                        buttonStirrup = Rebar.CreateFromCurvesAndShape(doc
+                            , form51
+                            , firstStirrupBarTape
+                            , rebarHookTypeForStirrup
+                            , rebarHookTypeForStirrup
+                            , foundation
+                            , new XYZ(0, 0, 1)
+                            , firstStirrupCurves
+                            , RebarHookOrientation.Right
+                            , RebarHookOrientation.Right);
+                    }
+                    catch
+                    {
+                        TaskDialog.Show("Revit", "Не удалось создать хомут! Возможно выбран некорректный тип формы 51 или отгиб арматуру не соответствует хомуту!");
+                        return Result.Cancelled;
+                    }
                 }
                 t.Commit();
             }
