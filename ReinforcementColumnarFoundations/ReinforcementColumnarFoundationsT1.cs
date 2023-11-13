@@ -252,10 +252,21 @@ namespace ReinforcementColumnarFoundations
                     try
                     {
                         //Точки для построения кривых стержня хомута
-                        XYZ firstStirrup_p1 = new XYZ(Math.Round(foundationProperty.FoundationBasePoint.X, 6), Math.Round(foundationProperty.FoundationBasePoint.Y, 6), Math.Round(foundationProperty.FoundationBasePoint.Z, 6));
-                        XYZ firstStirrup_p2 = new XYZ(Math.Round(firstStirrup_p1.X + 200 / 304.8, 6), Math.Round(firstStirrup_p1.Y, 6), Math.Round(firstStirrup_p1.Z, 6));
-                        XYZ firstStirrup_p3 = new XYZ(Math.Round(firstStirrup_p2.X,6), Math.Round(firstStirrup_p2.Y + 200 / 304.8, 6), Math.Round(firstStirrup_p2.Z, 6));
-                        XYZ firstStirrup_p4 = new XYZ(Math.Round(firstStirrup_p3.X - 200 / 304.8, 6), Math.Round(firstStirrup_p3.Y, 6), Math.Round(firstStirrup_p3.Z,6));
+                        XYZ firstStirrup_p1 = new XYZ(Math.Round(foundationProperty.FoundationBasePoint.X - foundationProperty.ColumnLength / 2 + coverDistance, 6)
+                            , Math.Round(foundationProperty.FoundationBasePoint.Y, 6)
+                            , Math.Round(foundationProperty.FoundationBasePoint.Z + foundationProperty.FoundationLength - 50 / 304.8, 6));
+
+                        XYZ firstStirrup_p2 = new XYZ(Math.Round(firstStirrup_p1.X + 200 / 304.8, 6)
+                            , Math.Round(firstStirrup_p1.Y, 6)
+                            , Math.Round(firstStirrup_p1.Z, 6));
+
+                        XYZ firstStirrup_p3 = new XYZ(Math.Round(firstStirrup_p2.X, 6)
+                            , Math.Round(firstStirrup_p2.Y + 200 / 304.8, 6)
+                            , Math.Round(firstStirrup_p2.Z, 6));
+
+                        XYZ firstStirrup_p4 = new XYZ(Math.Round(firstStirrup_p3.X - 200 / 304.8, 6)
+                            , Math.Round(firstStirrup_p3.Y, 6)
+                            , Math.Round(firstStirrup_p3.Z, 6));
 
                         //Кривые хомута
                         List<Curve> firstStirrupCurves = new List<Curve>();
@@ -277,10 +288,10 @@ namespace ReinforcementColumnarFoundations
                             , rebarHookTypeForStirrup
                             , rebarHookTypeForStirrup
                             , foundation
-                            , XYZ.BasisX
+                            , new XYZ(0, 0, 1)
                             , firstStirrupCurves
                             , RebarHookOrientation.Right
-                            , RebarHookOrientation.Right);
+                            , RebarHookOrientation.Right); ;
                     }
                     catch
                     {
