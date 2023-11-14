@@ -17,11 +17,13 @@ namespace ReinforcementColumnarFoundations
 
         public string IndirectBarTapeName { get; set; }
         public string FirstMainBarTapeName { get; set; }
+        public string LateralBarTapeName { get; set; }
         public string SecondBarTapesName { get; set; }
         public string BottomMainBarTapeName { get; set; }
         public string FirstStirrupBarTapeName { get; set; }
 
         public double StepIndirectRebar { get; set; }
+        public double StepLateralRebar { get; set; }
 
         public string SupracolumnRebarBarCoverTypeName { get; set; }
         public string BottomRebarCoverTypeName { get; set; }

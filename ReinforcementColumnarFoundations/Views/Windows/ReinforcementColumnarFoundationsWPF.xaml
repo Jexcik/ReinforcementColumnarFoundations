@@ -38,13 +38,15 @@
                         <ComboBox x:Name="comboBox_FirstBarTapes" HorizontalAlignment="Left"  Grid.Row="1" VerticalAlignment="Top" Width="100" Height="25" VerticalContentAlignment="Center" Margin="30,10,0,0"></ComboBox>
                         <ComboBox x:Name="comboBox_SecondBarTapes" HorizontalAlignment="Right" Grid.Row="1" VerticalAlignment="Top" Width="100" Height="25" VerticalContentAlignment="Center" Margin="0,170,10,0"></ComboBox>
                         <ComboBox x:Name="comboBox_BottomBarTapes" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="100" Height="25" Grid.Column="0" Grid.Row="1" Margin="10,0,0,130"></ComboBox>
-                        <ComboBox x:Name="comboBox_IndirectBarTapes" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="25" Grid.Column="0" Grid.Row="1" Margin="30,262,0,0"></ComboBox>
+                        <ComboBox x:Name="comboBox_LateralBarTapes" HorizontalAlignment="Left" VerticalAlignment="Bottom" HorizontalContentAlignment="Left" Width="110" Height="25" Grid.Column="0" Grid.Row="1" Margin="20,0,0,179"></ComboBox>
+                        <ComboBox x:Name="comboBox_IndirectBarTapes" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Left" Width="110" Height="25" Grid.Column="0" Grid.Row="1" Margin="20,261,0,0"></ComboBox>
                         <ComboBox x:Name="comboBox_FirstStirrupBarTapes" Width="100" Height="25" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,25,10,0"></ComboBox>
 
                         <ComboBox x:Name="comboBox_RebarCoverTypes" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="60" Height="25" Grid.Column="0" Grid.Row="1" Margin="90,0,0,335"></ComboBox>
                         <ComboBox x:Name="comboBox_RebarCoverBottom" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="60" Height="25" Grid.Column="0" Grid.Row="1" Margin="55,0,0,58"></ComboBox>
 
                         <TextBox x:Name="textBox_StepIndirectRebar" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Grid.Row="1" Width="40" Height="25" Margin="100,205,0,0" TextWrapping="Wrap" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></TextBox>
+                        <TextBox  x:Name="textBox_StepLateralRebar" HorizontalAlignment="Right" VerticalAlignment="Top"  Grid.Column="0" Grid.Row="1" Width="40" Height="25" Margin="0,290,80,0" TextWrapping="Wrap" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center"></TextBox>
 
                         <Image x:Name="image_Sections" VerticalAlignment="Top" HorizontalAlignment="Center" RenderOptions.BitmapScalingMode="Fant" Grid.Row="1" Source="/ReinforcementColumnarFoundations;component/Resources/Надколонник_Армирование.png" Margin="110,10,105,0"/>
                     </Grid>

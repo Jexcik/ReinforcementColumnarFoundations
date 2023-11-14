@@ -20,11 +20,14 @@ namespace ReinforcementColumnarFoundations.Views.Windows
         List<RebarHookType> RebarHookTypeList;
 
         public string SelectedReinforcementTypeButtonName;
+
         public double StepIndirectRebar;
+        public double StepLateralRebar;
 
         public RebarBarType IndirectBarTapes;
         public RebarBarType FirstMainBarTape;
         public RebarBarType SecondMainBarTape;
+        public RebarBarType LateralBarTapes;
         public RebarBarType BottomMainBarTape;
         public RebarBarType FirstStirrupBarTape;
         public RebarBarType SecondStirrupBarTape;
@@ -59,6 +62,9 @@ namespace ReinforcementColumnarFoundations.Views.Windows
 
             comboBox_FirstBarTapes.ItemsSource = RebarBarTypesList;
             comboBox_FirstBarTapes.DisplayMemberPath = "Name";
+
+            comboBox_LateralBarTapes.ItemsSource = RebarBarTypesList;
+            comboBox_LateralBarTapes.DisplayMemberPath = "Name";
 
             comboBox_SecondBarTapes.ItemsSource = RebarBarTypesList;
             comboBox_SecondBarTapes.DisplayMemberPath = "Name";
@@ -215,6 +221,19 @@ namespace ReinforcementColumnarFoundations.Views.Windows
                     }
                 }
 
+                if (RebarBarTypesList.FirstOrDefault(rbt => rbt.Name == ReinforcementColumnarFoundationsSettingsT1Item.LateralBarTapeName) != null)
+                {
+                    comboBox_LateralBarTapes.SelectedItem = RebarBarTypesList.FirstOrDefault(rbt => rbt.Name == ReinforcementColumnarFoundationsSettingsT1Item.LateralBarTapeName);
+                }
+                else
+                {
+                    if (comboBox_LateralBarTapes.Items.Count != 0)
+                    {
+                        comboBox_LateralBarTapes.SelectedItem = comboBox_LateralBarTapes.Items.GetItemAt(0);
+                    }
+                }
+
+
                 if (RebarBarTypesList.FirstOrDefault(rbt => rbt.Name == ReinforcementColumnarFoundationsSettingsT1Item.BottomMainBarTapeName) != null)
                 {
                     comboBox_BottomBarTapes.SelectedItem = RebarBarTypesList.FirstOrDefault(rbt => rbt.Name == ReinforcementColumnarFoundationsSettingsT1Item.BottomMainBarTapeName);
@@ -262,6 +281,7 @@ namespace ReinforcementColumnarFoundations.Views.Windows
                         comboBox_RebarCoverBottom.SelectedItem = comboBox_RebarCoverBottom.Items.GetItemAt(0);
                     }
                 }
+                textBox_StepIndirectRebar.Text = ReinforcementColumnarFoundationsSettingsT1Item.StepIndirectRebar.ToString();
             }
         }
 
@@ -317,6 +337,14 @@ namespace ReinforcementColumnarFoundations.Views.Windows
                 TaskDialog.Show("Revit", "Выберите тип основных стержней подколонника!");
                 return;
             }
+
+            LateralBarTapes = comboBox_LateralBarTapes.SelectedItem as RebarBarType;
+            if (LateralBarTapes == null)
+            {
+                TaskDialog.Show("Revit", "Выберите тип боковых стержней подколонника!");
+                return;
+            }
+
             FirstStirrupBarTape = comboBox_FirstStirrupBarTapes.SelectedItem as RebarBarType;
             if (FirstStirrupBarTape == null)
             {
@@ -352,9 +380,11 @@ namespace ReinforcementColumnarFoundations.Views.Windows
                 ReinforcementColumnarFoundationsSettingsT1Item.Form26Name = Form26.Name;
                 ReinforcementColumnarFoundationsSettingsT1Item.Form11Name = Form11.Name;
                 ReinforcementColumnarFoundationsSettingsT1Item.Form51Name = Form51.Name;
+                ReinforcementColumnarFoundationsSettingsT1Item.RebarHookTypeForStirrupName = RebarHookTypeForStirrup.Name;
 
                 ReinforcementColumnarFoundationsSettingsT1Item.IndirectBarTapeName = IndirectBarTapes.Name;
                 ReinforcementColumnarFoundationsSettingsT1Item.FirstMainBarTapeName = FirstMainBarTape.Name;
+                ReinforcementColumnarFoundationsSettingsT1Item.LateralBarTapeName = LateralBarTapes.Name;
                 ReinforcementColumnarFoundationsSettingsT1Item.FirstStirrupBarTapeName = FirstStirrupBarTape.Name;
                 ReinforcementColumnarFoundationsSettingsT1Item.BottomMainBarTapeName = BottomMainBarTape.Name;
 
@@ -367,7 +397,16 @@ namespace ReinforcementColumnarFoundations.Views.Windows
                     TaskDialog.Show("Revit", "Укажите шаг раскладки рядов косвенного армирования!");
                     return;
                 }
+
+                double.TryParse(textBox_StepLateralRebar.Text, out StepLateralRebar);
+                if (string.IsNullOrEmpty(textBox_StepLateralRebar.Text))
+                {
+                    TaskDialog.Show("Revit", "Укажите шаг расскладки боковых стержней надколонника!");
+                    return;
+                }
+
                 ReinforcementColumnarFoundationsSettingsT1Item.StepIndirectRebar = StepIndirectRebar;
+                ReinforcementColumnarFoundationsSettingsT1Item.StepLateralRebar=StepLateralRebar;
 
                 ReinforcementColumnarFoundationsSettingsT1Item.SaveSettings();
             }

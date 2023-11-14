@@ -148,6 +148,39 @@ namespace ReinforcementColumnarFoundations
                         return Result.Cancelled;
                     }
 
+                    //Боковое армирование подколонника
+                    try
+                    {
+                        //Точки для построения кривых стержня
+                        XYZ rebar_p1 = new XYZ(Math.Round(foundationProperty.FoundationBasePoint.X - foundationProperty.ColumnLength / 2, 6)
+                            , Math.Round(foundationProperty.FoundationBasePoint.Y - foundationProperty.ColumnWidth / 2 + firstMainBarDiam / 2 + coverDistance, 6)
+                            , Math.Round((foundationProperty.FoundationBasePoint.Z - foundationProperty.CoverTop) + foundationProperty.FoundationLength, 6));
+                        XYZ rebar_p2 = new XYZ(Math.Round(rebar_p1.X + 300 / 304.8, 6)
+                            , Math.Round(rebar_p1.Y, 6)
+                            , Math.Round(rebar_p1.Z, 6));
+
+                        //Кривые стержня
+                        List<Curve> mainRebarCurves = new List<Curve>();
+                        Curve line1 = Line.CreateBound(rebar_p1, rebar_p2) as Curve;
+                        mainRebarCurves.Add(line1);
+
+                        //Создание вертикального арматурного стержня
+                        MainRebar_1 = Rebar.CreateFromCurvesAndShape(doc
+                            , form01
+                            , firstMainBarType
+                            , null
+                            , null
+                            , foundation
+                            , XYZ.BasisY
+                            , mainRebarCurves
+                            , RebarHookOrientation.Right
+                            , RebarHookOrientation.Right);
+                    }
+                    catch
+                    {
+                        TaskDialog.Show("Revit", "Не удалось создать боковое армирование подколонника!");
+                    }
+
                     //Армирование подошвы
                     try
                     {
@@ -255,7 +288,7 @@ namespace ReinforcementColumnarFoundations
                         //Точки для построения кривых хомута
                         XYZ firstStirrup_p1 = new XYZ(Math.Round(foundationProperty.FoundationBasePoint.X - 200 / 304.8, 6)
                             , Math.Round(foundationProperty.FoundationBasePoint.Y - 200 / 304.8, 6)
-                            , Math.Round(foundationProperty.FoundationBasePoint.Z + foundationProperty.FoundationLength - 50 / 304.8, 6));
+                            , Math.Round(foundationProperty.FoundationBasePoint.Z + 150 / 304.8, 6));
 
                         XYZ firstStirrup_p2 = new XYZ(Math.Round(firstStirrup_p1.X + 400 / 304.8, 6)
                             , Math.Round(firstStirrup_p1.Y, 6)
