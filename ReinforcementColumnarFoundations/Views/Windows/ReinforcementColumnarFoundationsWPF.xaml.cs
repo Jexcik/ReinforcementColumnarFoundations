@@ -282,6 +282,7 @@ namespace ReinforcementColumnarFoundations.Views.Windows
                     }
                 }
                 textBox_StepIndirectRebar.Text = ReinforcementColumnarFoundationsSettingsT1Item.StepIndirectRebar.ToString();
+                textBox_StepLateralRebar.Text= ReinforcementColumnarFoundationsSettingsT1Item.StepLateralRebar.ToString() ;
             }
         }
 
