@@ -180,13 +180,13 @@ namespace ReinforcementColumnarFoundations
                             , RebarHookOrientation.Right
                             , RebarHookOrientation.Right);
 
+                        ElementTransformUtils.RotateElement(doc, MainRebar_1.Id, rotateLineBase, (foundation.Location as LocationPoint).Rotation);
                         MainRebar_1.get_Parameter(BuiltInParameter.REBAR_ELEM_LAYOUT_RULE).Set(3);
                         MainRebar_1.get_Parameter(BuiltInParameter.REBAR_ELEM_QUANTITY_OF_BARS).Set((int)(foundationProperty.ColumnHeight / StepLateralRebar) + 1);
                         MainRebar_1.get_Parameter(BuiltInParameter.REBAR_ELEM_BAR_SPACING).Set(StepLateralRebar);
 
-                        ElementTransformUtils.RotateElement(doc, MainRebar_1.Id, rotateLineBase, (foundation.Location as LocationPoint).Rotation);
-                        ElementTransformUtils.CopyElement(doc, MainRebar_1.Id, new XYZ(0, foundationProperty.ColumnWidth - 2 * (coverDistance / 1.2), 0));
-
+                        var elementRotate = ElementTransformUtils.CopyElement(doc, MainRebar_1.Id, new XYZ(0, 0, 0));
+                        ElementTransformUtils.RotateElements(doc, elementRotate, rotateLineBase, 180 * (Math.PI / 180));
                     }
                     catch
                     {
