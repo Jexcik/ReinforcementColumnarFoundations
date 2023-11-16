@@ -345,8 +345,6 @@ namespace ReinforcementColumnarFoundations
                         MainRebar_1.get_Parameter(BuiltInParameter.REBAR_ELEM_LAYOUT_RULE).Set(2);
                         MainRebar_1.get_Parameter(BuiltInParameter.REBAR_ELEM_BAR_SPACING).Set(100 / 304.8);
 
-                        elementsId.Add(MainRebar_1.Id);
-
                         rebar_p1 = new XYZ(Math.Round(foundationProperty.FoundationBasePoint.X - foundationProperty.ColumnLength / 2 + 25 / 304.8, 6)
                             , Math.Round(foundationProperty.FoundationBasePoint.Y - foundationProperty.ColumnWidth / 2 + 25 / 304.8, 6)
                             , Math.Round(foundationProperty.FoundationBasePoint.Z + foundationProperty.FoundationLength - 50 / 304.8 - inderectMainBarDiam, 6));
@@ -375,6 +373,7 @@ namespace ReinforcementColumnarFoundations
                         MainRebar_2.get_Parameter(BuiltInParameter.REBAR_ELEM_LAYOUT_RULE).Set(2);
                         MainRebar_2.get_Parameter(BuiltInParameter.REBAR_ELEM_BAR_SPACING).Set(100 / 304.8);
 
+                        elementsId.Add(MainRebar_1.Id);
                         elementsId.Add(MainRebar_2.Id);
 
                         Group newRebarGroup = doc.Create.NewGroup(elementsId);
