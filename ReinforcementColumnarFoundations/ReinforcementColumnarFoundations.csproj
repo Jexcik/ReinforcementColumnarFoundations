@@ -56,7 +56,7 @@
   <ItemGroup>
     <Compile Include="AlphanumComparatorFastString.cs" />
     <Compile Include="App.cs" />
-    <Compile Include="FoundationPropertyCollector.cs" />
+    <Compile Include="Models\Foundation.cs" />
     <Compile Include="FoundationSelectionFilter.cs" />
     <Compile Include="Infrastructure\Commands\Base\Command.cs" />
     <Compile Include="Infrastructure\Commands\LambdaCommand.cs" />
@@ -99,8 +99,9 @@
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Models\" />
+    <Resource Include="Resources\RebarForms\21.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

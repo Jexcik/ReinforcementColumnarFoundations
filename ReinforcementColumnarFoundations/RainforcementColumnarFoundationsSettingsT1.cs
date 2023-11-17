@@ -12,6 +12,7 @@ namespace ReinforcementColumnarFoundations
         public string Form01Name { get; set; }
         public string Form26Name { get; set; }
         public string Form11Name { get; set; }
+        public string Form21Name { get; set; }
         public string Form51Name { get; set; }
         public string RebarHookTypeForStirrupName { get; set; }
 

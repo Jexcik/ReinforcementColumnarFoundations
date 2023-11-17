@@ -28,19 +28,20 @@
                         </Grid.RowDefinitions>
                         <GridSplitter Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Background="#FFACACAC" Grid.ColumnSpan="2" DragIncrement="28"/>
 
-
                         <Label x:Name="label_Type1" Content="Тип 1" HorizontalAlignment="Left" Margin="45,10,0,0" VerticalAlignment="Top"/>
                         <Button x:Name="buttonType1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,35,0,0" Width="90" Height="90" BorderBrush="#FF707070" BorderThickness="1,1,1,1" Grid.Row="0" Click="buttonType1_Click">
                             <Image RenderOptions.BitmapScalingMode="Fant" Source="/ReinforcementColumnarFoundations;component/Resources/Надколонник_Армирование_Тип1.png" />
                         </Button>
 
 
-                        <ComboBox x:Name="comboBox_FirstBarTapes" HorizontalAlignment="Left"  Grid.Row="1" VerticalAlignment="Top" Width="100" Height="25" VerticalContentAlignment="Center" Margin="30,10,0,0"></ComboBox>
+                        <ComboBox x:Name="comboBox_FirstBarTapes"  HorizontalAlignment="Left"  Grid.Row="1" VerticalAlignment="Top" Width="100" Height="25" VerticalContentAlignment="Center" Margin="30,10,0,0"></ComboBox>
                         <ComboBox x:Name="comboBox_SecondBarTapes" HorizontalAlignment="Right" Grid.Row="1" VerticalAlignment="Top" Width="100" Height="25" VerticalContentAlignment="Center" Margin="0,170,10,0"></ComboBox>
                         <ComboBox x:Name="comboBox_BottomBarTapes" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="100" Height="25" Grid.Column="0" Grid.Row="1" Margin="10,0,0,130"></ComboBox>
                         <ComboBox x:Name="comboBox_LateralBarTapes" HorizontalAlignment="Left" VerticalAlignment="Bottom" HorizontalContentAlignment="Left" Width="110" Height="25" Grid.Column="0" Grid.Row="1" Margin="20,0,0,179"></ComboBox>
                         <ComboBox x:Name="comboBox_IndirectBarTapes" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Left" Width="110" Height="25" Grid.Column="0" Grid.Row="1" Margin="20,261,0,0"></ComboBox>
                         <ComboBox x:Name="comboBox_FirstStirrupBarTapes" Width="100" Height="25" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,25,10,0"></ComboBox>
+
+                        <ComboBox ItemsSource="{Binding viewList}" Width="100" Height="25" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,85,10,0"></ComboBox>
 
                         <ComboBox x:Name="comboBox_RebarCoverTypes" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="60" Height="25" Grid.Column="0" Grid.Row="1" Margin="90,0,0,335"></ComboBox>
                         <ComboBox x:Name="comboBox_RebarCoverBottom" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="60" Height="25" Grid.Column="0" Grid.Row="1" Margin="55,0,0,58"></ComboBox>
@@ -69,35 +70,41 @@
                             <RowDefinition Height="120*"/>
                             <RowDefinition Height="120*"/>
                             <RowDefinition Height="120*"/>
+                            <RowDefinition Height="120*"/>
                         </Grid.RowDefinitions>
-                        <Label x:Name="label_Form01" Content="Форма 01" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                        <Image x:Name="image_Form01" Height="75" Margin="10,36,10,0" VerticalAlignment="Top"  RenderOptions.BitmapScalingMode="Fant" Source="/ReinforcementColumnarFoundations;component/Resources/RebarForms/01.png"/>
-                        <ComboBox x:Name="comboBox_Form01" Margin="10,105,10,0" VerticalAlignment="Top" Height="25" VerticalContentAlignment="Center"/>
+                        <Label x:Name="label_Form01" Content="Форма 01" HorizontalAlignment="Left" Margin="10,6,0,0" VerticalAlignment="Top"/>
+                        <Image x:Name="image_Form01" Height="75" Margin="10,24,10,0" VerticalAlignment="Top"  RenderOptions.BitmapScalingMode="Fant" Source="/ReinforcementColumnarFoundations;component/Resources/RebarForms/01.png"/>
+                        <ComboBox x:Name="comboBox_Form01" Margin="10,87,10,0" VerticalAlignment="Top" Height="25" VerticalContentAlignment="Center"/>
                         <GridSplitter Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Background="#FFACACAC"/>
 
-                        <Label x:Name="label_Form26" Content="Форма 26" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="1"/>
-                        <Image x:Name="image_Form26" Height="75" Margin="10,36,10,0" VerticalAlignment="Top" RenderOptions.BitmapScalingMode="Fant" Panel.ZIndex="6" Grid.Row="1" Source="/ReinforcementColumnarFoundations;component/Resources/RebarForms/26.png"/>
-                        <ComboBox x:Name="comboBox_Form26" Margin="10,105,10,0" VerticalAlignment="Top" Height="25" VerticalContentAlignment="Center" Grid.Row="1"/>
+                        <Label x:Name="label_Form26" Content="Форма 26" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+                        <Image x:Name="image_Form26" Height="75" Margin="10,24,10,0" VerticalAlignment="Top" RenderOptions.BitmapScalingMode="Fant" Panel.ZIndex="6" Grid.Row="1" Source="/ReinforcementColumnarFoundations;component/Resources/RebarForms/26.png"/>
+                        <ComboBox x:Name="comboBox_Form26" Margin="10,87,10,0" VerticalAlignment="Top" Height="25" VerticalContentAlignment="Center" Grid.Row="1"/>
                         <GridSplitter Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Background="#FFACACAC" Grid.Row="1"/>
 
-                        <Label x:Name="label_Form11" Content="Форма 11" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="2"/>
-                        <Image x:Name="image_Form11" Height="75" Margin="10,35,10,0" VerticalAlignment="Top" Grid.Row="2" RenderOptions.BitmapScalingMode="Fant" Source="/ReinforcementColumnarFoundations;component/Resources/RebarForms/11.png"/>
-                        <ComboBox x:Name="comboBox_Form11" Margin="10,105,10,0" VerticalAlignment="Top" Height="25" VerticalContentAlignment="Center" Grid.Row="2"/>
+                        <Label x:Name="label_Form11" Content="Форма 11" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Grid.Row="2"/>
+                        <Image x:Name="image_Form11" Height="75" Margin="10,24,10,0" VerticalAlignment="Top" Grid.Row="2" RenderOptions.BitmapScalingMode="Fant" Source="/ReinforcementColumnarFoundations;component/Resources/RebarForms/11.png"/>
+                        <ComboBox x:Name="comboBox_Form11" Margin="10,87,10,0" VerticalAlignment="Top" Height="25" VerticalContentAlignment="Center" Grid.Row="2"/>
                         <GridSplitter Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Background="#FFACACAC" Grid.Row="2"/>
 
-                        <Label x:Name="label_Form51" Content="Форма 51" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="3"/>
-                        <Image x:Name="image_Form51" Height="75" Margin="10,35,10,0" VerticalAlignment="Top" Grid.Row="3"  RenderOptions.BitmapScalingMode="Fant" Source="/ReinforcementColumnarFoundations;component/Resources/RebarForms/51.png"/>
-                        <ComboBox x:Name="comboBox_Form51" Margin="10,105,10,0" VerticalAlignment="Top" Height="25" VerticalContentAlignment="Center" Grid.Row="3"/>
+                        <Label x:Name="label_Form51" Content="Форма 51" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Grid.Row="3"/>
+                        <Image x:Name="image_Form51" Height="75" Margin="10,18,10,0" VerticalAlignment="Top" Grid.Row="3"  RenderOptions.BitmapScalingMode="Fant" Source="/ReinforcementColumnarFoundations;component/Resources/RebarForms/51.png"/>
+                        <ComboBox x:Name="comboBox_Form51" Margin="10,87,10,0" VerticalAlignment="Top" Height="25" VerticalContentAlignment="Center" Grid.Row="3"/>
                         <GridSplitter Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Background="#FFACACAC" Grid.Row="3"/>
 
-                        <Label x:Name="label_RebarHookType" Content="Отгиб арматуры для хомутов" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Grid.Row="4"/>
-                        <Image x:Name="image_RebarHookType" Height="75" Margin="10,35,10,0" VerticalAlignment="Top" Grid.Row="4"  RenderOptions.BitmapScalingMode="Fant" Source="/ReinforcementColumnarFoundations;component/Resources/RebarForms/RebarHookType.png"/>
-                        <ComboBox x:Name="comboBox_RebarHookType" Margin="10,105,10,0" VerticalAlignment="Top" Grid.Row="4" Height="25" VerticalContentAlignment="Center"/>
+                        <Label x:Name="label_Form21" Content="Форма 21" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Grid.Row="4"/>
+                        <Image x:Name="image_Form21" Height="75" Margin="10,18,10,0" VerticalAlignment="Top" Grid.Row="4"  RenderOptions.BitmapScalingMode="Fant" Source="/ReinforcementColumnarFoundations;component/Resources/RebarForms/21.png"/>
+                        <ComboBox x:Name="comboBox_Form21" Margin="10,87,10,0" VerticalAlignment="Top" Height="25" VerticalContentAlignment="Center" Grid.Row="4"/>
+                        <GridSplitter Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Background="#FFACACAC" Grid.Row="4"/>
+
+                        <Label x:Name="label_RebarHookType" Content="Отгиб арматуры для хомутов" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Grid.Row="5"/>
+                        <Image x:Name="image_RebarHookType" Height="75" Margin="10,18,10,0" VerticalAlignment="Top" Grid.Row="5"  RenderOptions.BitmapScalingMode="Fant" Source="/ReinforcementColumnarFoundations;component/Resources/RebarForms/RebarHookType.png"/>
+                        <ComboBox x:Name="comboBox_RebarHookType" Margin="10,87,10,0" VerticalAlignment="Top" Grid.Row="5" Height="25" VerticalContentAlignment="Center"/>
                     </Grid>
                 </Grid>
             </TabItem>
         </TabControl>
         <Button x:Name="btn_Ok" Content="Ок" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,125,10" Width="100" Height="25" Click="btn_Ok_Click" Grid.Row="1"/>
-        <Button x:Name="btn_Cancel" Command="{Binding CloseApplicationCommand}" Content="Отмена" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Width="100" Height="25" Grid.Row="1"/>
+        <Button x:Name="btn_Cancel" Content="Отмена" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Width="100" Height="25" Grid.Row="1"/>
     </Grid>
 </Window>

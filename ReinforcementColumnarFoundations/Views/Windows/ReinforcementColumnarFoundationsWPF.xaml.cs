@@ -1,5 +1,6 @@
 ﻿using Autodesk.Revit.DB.Structure;
 using Autodesk.Revit.UI;
+using ReinforcementColumnarFoundations.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -38,6 +39,7 @@ namespace ReinforcementColumnarFoundations.Views.Windows
         public RebarShape Form01;
         public RebarShape Form26;
         public RebarShape Form11;
+        public RebarShape Form21;
         public RebarShape Form51;
 
         public RebarHookType RebarHookTypeForStirrup;
@@ -57,6 +59,9 @@ namespace ReinforcementColumnarFoundations.Views.Windows
             ReinforcementColumnarFoundationsSettingsT1Item = new RainforcementColumnarFoundationsSettingsT1().GetSettings();
 
             InitializeComponent();
+
+            DataContext = new ReinforcementColumnarFoundationsViewModel();
+
             comboBox_IndirectBarTapes.ItemsSource = RebarBarTypesList;
             comboBox_IndirectBarTapes.DisplayMemberPath = "Name";
 
@@ -89,6 +94,9 @@ namespace ReinforcementColumnarFoundations.Views.Windows
 
             comboBox_Form11.ItemsSource = RebarShapeList;
             comboBox_Form11.DisplayMemberPath = "Name";
+
+            comboBox_Form21.ItemsSource = RebarShapeList;
+            comboBox_Form21.DisplayMemberPath = "Name";
 
             comboBox_Form51.ItemsSource = RebarShapeList;
             comboBox_Form51.DisplayMemberPath = "Name";
@@ -157,6 +165,18 @@ namespace ReinforcementColumnarFoundations.Views.Windows
                     if (comboBox_Form11.Items.Count != 0)
                     {
                         comboBox_Form11.SelectedItem = comboBox_Form11.Items.GetItemAt(0);
+                    }
+                }
+
+                if (RebarShapeList.FirstOrDefault(rbt => rbt.Name == ReinforcementColumnarFoundationsSettingsT1Item.Form21Name) != null)
+                {
+                    comboBox_Form21.SelectedItem = RebarShapeList.FirstOrDefault(rbt => rbt.Name == ReinforcementColumnarFoundationsSettingsT1Item.Form21Name);
+                }
+                else
+                {
+                    if (comboBox_Form21.Items.Count != 0)
+                    {
+                        comboBox_Form21.SelectedItem = comboBox_Form21.Items.GetItemAt(0);
                     }
                 }
 
@@ -282,7 +302,7 @@ namespace ReinforcementColumnarFoundations.Views.Windows
                     }
                 }
                 textBox_StepIndirectRebar.Text = ReinforcementColumnarFoundationsSettingsT1Item.StepIndirectRebar.ToString();
-                textBox_StepLateralRebar.Text= ReinforcementColumnarFoundationsSettingsT1Item.StepLateralRebar.ToString() ;
+                textBox_StepLateralRebar.Text = ReinforcementColumnarFoundationsSettingsT1Item.StepLateralRebar.ToString();
             }
         }
 
@@ -309,6 +329,12 @@ namespace ReinforcementColumnarFoundations.Views.Windows
             if (Form11 == null)
             {
                 TaskDialog.Show("Revit", "Выберите форму арматуры для Г-образных стержней (Форма 11), чтобы продолжить работу!");
+                return;
+            }
+            Form21 = comboBox_Form21.SelectedItem as RebarShape;
+            if (Form21 == null)
+            {
+                TaskDialog.Show("Revit", "Выберите форму арматуры для П-образных стержней (Форма 21), чтобы продолжить работу!");
                 return;
             }
             Form51 = comboBox_Form51.SelectedItem as RebarShape;
@@ -380,6 +406,7 @@ namespace ReinforcementColumnarFoundations.Views.Windows
                 ReinforcementColumnarFoundationsSettingsT1Item.Form01Name = Form01.Name;
                 ReinforcementColumnarFoundationsSettingsT1Item.Form26Name = Form26.Name;
                 ReinforcementColumnarFoundationsSettingsT1Item.Form11Name = Form11.Name;
+                ReinforcementColumnarFoundationsSettingsT1Item.Form11Name = Form21.Name;
                 ReinforcementColumnarFoundationsSettingsT1Item.Form51Name = Form51.Name;
                 ReinforcementColumnarFoundationsSettingsT1Item.RebarHookTypeForStirrupName = RebarHookTypeForStirrup.Name;
 
@@ -407,7 +434,7 @@ namespace ReinforcementColumnarFoundations.Views.Windows
                 }
 
                 ReinforcementColumnarFoundationsSettingsT1Item.StepIndirectRebar = StepIndirectRebar;
-                ReinforcementColumnarFoundationsSettingsT1Item.StepLateralRebar=StepLateralRebar;
+                ReinforcementColumnarFoundationsSettingsT1Item.StepLateralRebar = StepLateralRebar;
 
                 ReinforcementColumnarFoundationsSettingsT1Item.SaveSettings();
             }

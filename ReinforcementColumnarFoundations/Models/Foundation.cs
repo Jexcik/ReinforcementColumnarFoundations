@@ -7,9 +7,9 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Media.Media3D;
 
-namespace ReinforcementColumnarFoundations
+namespace ReinforcementColumnarFoundations.Models
 {
-    class FoundationPropertyCollector
+    class Foundation
     {
         public Level BaseLevel { get; }
         public double BaseLevelElevation { get; }
@@ -28,7 +28,7 @@ namespace ReinforcementColumnarFoundations
         public XYZ FoundationBasePoint { get; }
         public double CoverTop { get; }
 
-        public FoundationPropertyCollector(Document doc, FamilyInstance foundation)
+        public Foundation(Document doc, FamilyInstance foundation)
         {
             FamilySymbol familySymbol = foundation.Symbol;
             //Базовый уровень

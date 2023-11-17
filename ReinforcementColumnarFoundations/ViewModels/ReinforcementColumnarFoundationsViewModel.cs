@@ -3,6 +3,7 @@ using ReinforcementColumnarFoundations.Infrastructure.Commands;
 using ReinforcementColumnarFoundations.ViewModels.Base;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,14 @@ namespace ReinforcementColumnarFoundations.ViewModels
 {
     public class ReinforcementColumnarFoundationsViewModel : ViewModel
     {
+
+        public List<string> viewList = new List<string>
+        {
+            "Pavel"
+            ,"Igor"
+            ,"Mark"
+        };
+
         #region Заголовок окна
         private string _Title = "Армирование столбчатых фундаментов";
         /// <summary>
@@ -31,6 +40,7 @@ namespace ReinforcementColumnarFoundations.ViewModels
             }
         }
         #endregion
+
         #region Команды
         public ICommand CloseApplicationCommand { get; }
         private void OnCloseApplicationCommandExecuted(object p)

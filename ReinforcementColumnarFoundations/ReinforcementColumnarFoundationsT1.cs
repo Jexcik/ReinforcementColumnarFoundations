@@ -3,12 +3,8 @@ using Autodesk.Revit.DB.Structure;
 using Autodesk.Revit.UI;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Common;
 using ReinforcementColumnarFoundations.Views.Windows;
-using System.Windows.Documents;
+using ReinforcementColumnarFoundations.Models;
 
 namespace ReinforcementColumnarFoundations
 {
@@ -55,7 +51,7 @@ namespace ReinforcementColumnarFoundations
                 t.Start("Армирование фундаментов - Тип 1");
                 foreach (FamilyInstance foundation in foundationList)
                 {
-                    FoundationPropertyCollector foundationProperty = new FoundationPropertyCollector(doc, foundation);
+                    Foundation foundationProperty = new Foundation(doc, foundation);
                     //Задаем защитный слой арматуры других граней фундамента
                     foundation.get_Parameter(BuiltInParameter.CLEAR_COVER_OTHER).Set(scRebarBarCoverType.Id);
                     //Задаем защитный слой арматуры нижней грани
