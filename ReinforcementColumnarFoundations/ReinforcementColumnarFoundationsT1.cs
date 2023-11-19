@@ -319,17 +319,17 @@ namespace ReinforcementColumnarFoundations
                     try
                     {
                         //Точки для построение П стержней
-                        XYZ rebar_p1 = new XYZ(Math.Round(foundationProperty.FoundationBasePoint.X - foundationProperty.Ledge1Length / 2 + 350 / 304.8, 6)
+                        XYZ rebar_p1 = new XYZ(Math.Round(foundationProperty.FoundationBasePoint.X - foundationProperty.Ledge1Length / 2 + 500 / 304.8, 6)
                             , Math.Round(foundationProperty.FoundationBasePoint.Y, 6)
                             , Math.Round(foundationProperty.FoundationBasePoint.Z + 1.5 * bottomMaimBarDiam + bottomCoverDistance, 6));
 
-                        XYZ rebar_p2 = new XYZ(Math.Round(rebar_p1.X + foundationProperty.Ledge1Length - 50 / 304.8, 6)
+                        XYZ rebar_p2 = new XYZ(Math.Round(rebar_p1.X + coverDistance - 500 / 304.8, 6)
                             , Math.Round(rebar_p1.Y, 6)
                             , Math.Round(rebar_p1.Z, 6));
 
                         XYZ rebar_p3 = new XYZ(Math.Round(rebar_p2.X, 6)
                             , Math.Round(rebar_p1.Y, 6)
-                            , Math.Round(rebar_p2.Z + 300 / 304.8, 6));
+                            , Math.Round(rebar_p2.Z + foundationProperty.Ledge1Height - (1.5 * bottomMaimBarDiam + 2 * bottomCoverDistance), 6));
 
                         XYZ rebar_p4 = new XYZ(Math.Round(rebar_p1.X, 6)
                             , Math.Round(rebar_p1.Y, 6)
@@ -357,9 +357,9 @@ namespace ReinforcementColumnarFoundations
                             , RebarHookOrientation.Right
                             , RebarHookOrientation.Right);
 
-                        //ElementTransformUtils.RotateElement(doc, MainRebar_1.Id, rotateLineBase, (foundation.Location as LocationPoint).Rotation);
-                        //MainRebar_1.get_Parameter(BuiltInParameter.REBAR_ELEM_LAYOUT_RULE).Set(2);
-                        //MainRebar_1.get_Parameter(BuiltInParameter.REBAR_ELEM_BAR_SPACING).Set(200 / 304.8);
+                        ElementTransformUtils.RotateElement(doc, MainRebar_1.Id, rotateLineBase, (foundation.Location as LocationPoint).Rotation);
+                        MainRebar_1.get_Parameter(BuiltInParameter.REBAR_ELEM_LAYOUT_RULE).Set(2);
+                        MainRebar_1.get_Parameter(BuiltInParameter.REBAR_ELEM_BAR_SPACING).Set(200 / 304.8);
 
                     }
                     catch
