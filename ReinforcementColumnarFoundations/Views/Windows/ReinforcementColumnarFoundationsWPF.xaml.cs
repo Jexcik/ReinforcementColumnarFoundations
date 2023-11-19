@@ -25,6 +25,9 @@ namespace ReinforcementColumnarFoundations.Views.Windows
         public double StepIndirectRebar;
         public double StepLateralRebar;
 
+        public int CountX;
+        public int CountY;
+
         public RebarBarType IndirectBarTapes;
         public RebarBarType FirstMainBarTape;
         public RebarBarType SecondMainBarTape;
@@ -406,7 +409,7 @@ namespace ReinforcementColumnarFoundations.Views.Windows
                 ReinforcementColumnarFoundationsSettingsT1Item.Form01Name = Form01.Name;
                 ReinforcementColumnarFoundationsSettingsT1Item.Form26Name = Form26.Name;
                 ReinforcementColumnarFoundationsSettingsT1Item.Form11Name = Form11.Name;
-                ReinforcementColumnarFoundationsSettingsT1Item.Form11Name = Form21.Name;
+                ReinforcementColumnarFoundationsSettingsT1Item.Form21Name = Form21.Name;
                 ReinforcementColumnarFoundationsSettingsT1Item.Form51Name = Form51.Name;
                 ReinforcementColumnarFoundationsSettingsT1Item.RebarHookTypeForStirrupName = RebarHookTypeForStirrup.Name;
 
@@ -433,8 +436,25 @@ namespace ReinforcementColumnarFoundations.Views.Windows
                     return;
                 }
 
+                int.TryParse(textBox_CountX.Text, out CountX);
+                if (string.IsNullOrEmpty(textBox_CountX.Text))
+                {
+                    TaskDialog.Show("Revit", "Укажите кол-во стержней по X");
+                    return;
+                }
+                int.TryParse(textBox_CountY.Text, out CountY);
+                if (string.IsNullOrEmpty(textBox_CountY.Text))
+                {
+                    TaskDialog.Show("Revit", "Укажите кол-во стержней по Y");
+                    return;
+                }
+
+
                 ReinforcementColumnarFoundationsSettingsT1Item.StepIndirectRebar = StepIndirectRebar;
                 ReinforcementColumnarFoundationsSettingsT1Item.StepLateralRebar = StepLateralRebar;
+
+                ReinforcementColumnarFoundationsSettingsT1Item.CountX = CountX;
+                ReinforcementColumnarFoundationsSettingsT1Item.CountY = CountY;
 
                 ReinforcementColumnarFoundationsSettingsT1Item.SaveSettings();
             }

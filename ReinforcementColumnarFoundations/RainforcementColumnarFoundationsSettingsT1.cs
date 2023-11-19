@@ -25,6 +25,8 @@ namespace ReinforcementColumnarFoundations
 
         public double StepIndirectRebar { get; set; }
         public double StepLateralRebar { get; set; }
+        public int CountY { get; set; }
+        public int CountX { get; set; }
 
         public string SupracolumnRebarBarCoverTypeName { get; set; }
         public string BottomRebarCoverTypeName { get; set; }
