@@ -165,7 +165,7 @@
                             x:Name="comboBox_RebarCoverTypes"
                             ItemsSource="{Binding RebarCoverTypeList}"
                             DisplayMemberPath="Name"
-                            SelectedItem="{Binding Path=SelectedCoverType,Mode=TwoWay}"
+                            SelectedItem="{Binding SelectedOtherCoverType,Mode=TwoWay}"
                             HorizontalAlignment="Left" 
                             VerticalAlignment="Bottom" 
                             Width="60" Height="25" 
@@ -178,6 +178,7 @@
                             x:Name="comboBox_RebarCoverBottom" 
                             ItemsSource="{Binding RebarCoverTypeList}"
                             DisplayMemberPath="Name"
+                            SelectedItem="{Binding SelectedBottomCoverType,Mode=TwoWay}"
                             HorizontalAlignment="Left" 
                             VerticalAlignment="Bottom" 
                             Width="60" Height="25" 
@@ -328,7 +329,14 @@
 
                         <Label x:Name="label_RebarHookType" Content="Отгиб арматуры для хомутов" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Grid.Row="5"/>
                         <Image x:Name="image_RebarHookType" Height="75" Margin="10,18,10,0" VerticalAlignment="Top" Grid.Row="5"  RenderOptions.BitmapScalingMode="Fant" Source="/ReinforcementColumnarFoundations;component/Resources/RebarForms/RebarHookType.png"/>
-                        <ComboBox x:Name="comboBox_RebarHookType" Margin="10,87,10,0" VerticalAlignment="Top" Grid.Row="5" Height="25" VerticalContentAlignment="Center"/>
+                        <ComboBox 
+                            x:Name="comboBox_RebarHookType" 
+                            ItemsSource="{Binding Path=RebarHookTypeList}"
+                            DisplayMemberPath="Name"
+                            Margin="10,87,10,0" VerticalAlignment="Top"
+                            Grid.Row="5" 
+                            Height="25" 
+                            VerticalContentAlignment="Center"/>
                     </Grid>
                 </Grid>
             </TabItem>

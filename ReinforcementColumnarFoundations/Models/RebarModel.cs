@@ -59,7 +59,7 @@ namespace ReinforcementColumnarFoundations.Models
         /// </summary>
         /// <param name="doc"></param>
         /// <returns>Возвращает список типов отгибов</returns>
-        public List<RebarHookType> rebarHookTypeList(Document doc)
+        public List<RebarHookType> GetRebarHookType(Document doc)
         {
             return new FilteredElementCollector(doc)
             .OfClass(typeof(RebarHookType))

@@ -80,6 +80,8 @@ namespace ReinforcementColumnarFoundations.ViewModels
         #endregion
 
         #region ComboBox
+
+        #region RebarBarType
         private RebarBarType selectedRebarType;
         public RebarBarType SelectedRebarType
         {
@@ -104,22 +106,29 @@ namespace ReinforcementColumnarFoundations.ViewModels
                 OnPropertyChanged(nameof(RebarBarTypeList));
             }
         }
-
-
-        private RebarCoverType selectedCoverType;
-        public RebarCoverType SelectedCoverType
+        #endregion
+        #region Cover
+        private RebarCoverType selectedBottomCoverType;
+        public RebarCoverType SelectedBottomCoverType
         {
-            get
-            {
-                return selectedCoverType;
-            }
+            get => selectedBottomCoverType;
             set
             {
-                selectedCoverType = value;
-                OnPropertyChanged(nameof(SelectedCoverType));
+                selectedBottomCoverType = value;
+                OnPropertyChanged(nameof(SelectedBottomCoverType));
             }
         }
 
+        private RebarCoverType selectedOtherCoverType;
+        public RebarCoverType SelectedOtherCoverType
+        {
+            get => selectedOtherCoverType;
+            set
+            {
+                selectedOtherCoverType = value;
+                OnPropertyChanged(nameof(SelectedOtherCoverType));
+            }
+        }
         private List<RebarCoverType> rebarCoverTypeList;
         public List<RebarCoverType> RebarCoverTypeList
         {
@@ -130,9 +139,20 @@ namespace ReinforcementColumnarFoundations.ViewModels
                 OnPropertyChanged(nameof(RebarCoverTypeList));
             }
         }
-
+        #endregion
+        #region Shape
+        private RebarShape selectedRebarShape;
+        public RebarShape SelectedRebarShape
+        {
+            get => selectedRebarShape;
+            set
+            {
+                selectedRebarShape = value;
+                OnPropertyChanged(nameof(SelectedRebarShape));
+            }
+        }
         private List<RebarShape> rebarShapesList;
-        public List <RebarShape> RebarShapesList
+        public List<RebarShape> RebarShapesList
         {
             get => rebarShapesList;
             set
@@ -141,7 +161,28 @@ namespace ReinforcementColumnarFoundations.ViewModels
                 OnPropertyChanged(nameof(RebarShapesList));
             }
         }
-
+        #endregion
+        #region Hook
+        private RebarHookType selectedHookType;
+        public RebarHookType SelectedHookType
+        {
+            get => selectedHookType;
+            set
+            {
+                selectedHookType = value;
+            }
+        }
+        private List<RebarHookType> rebarHookTypeList;
+        public List<RebarHookType> RebarHookTypeList
+        {
+            get => rebarHookTypeList;
+            set
+            {
+                rebarHookTypeList = value;
+                OnPropertyChanged(nameof(RebarHookTypeList));
+            }
+        }
+        #endregion
 
         #endregion
 
@@ -152,6 +193,7 @@ namespace ReinforcementColumnarFoundations.ViewModels
             RebarBarTypeList = rebarModel.GetRebarTypes(_doc);
             RebarCoverTypeList = rebarModel.GetCoverTypes(_doc);
             RebarShapesList = rebarModel.GetRebarShapes(_doc);
+            RebarHookTypeList=rebarModel.GetRebarHookType(_doc);
             CloseWindowCommand = new RelayCommand(CloseWindow, p => true);
         }
     }
