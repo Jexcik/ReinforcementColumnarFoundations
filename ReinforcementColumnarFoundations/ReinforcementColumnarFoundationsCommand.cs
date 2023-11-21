@@ -28,27 +28,6 @@ namespace ReinforcementColumnarFoundations
                 .OrderBy(rbt => rbt.Name)
                 .ToList();
 
-            //Список типов защитных слоев
-            List<RebarCoverType> rebarCoverTypesList = new FilteredElementCollector(doc)
-                .OfClass(typeof(RebarCoverType))
-                .Cast<RebarCoverType>()
-                .Where(rct => char.IsDigit(rct.Name[0]))
-                .OrderBy(rct => rct.Name)
-                .ToList();
-
-            //Формы для формы
-            List<RebarShape> rebarShapeList = new FilteredElementCollector(doc)
-                .OfClass(typeof(RebarShape))
-                .Cast<RebarShape>()
-                .OrderBy(rs => rs.Name)
-                .ToList();
-
-            List<RebarHookType> rebarHookTypeList = new FilteredElementCollector(doc)
-                .OfClass(typeof(RebarHookType))
-                .OrderBy(rht => rht.Name)
-                .Cast<RebarHookType>()
-                .ToList();
-
             List<FamilyInstance> foundationsList = GetFoundationsFromCurrentSelection(doc, sel);
 
             if (foundationsList.Count == 0)
@@ -69,25 +48,27 @@ namespace ReinforcementColumnarFoundations
                 }
             }
 
+            var vm = new ReinforcementColumnarFoundationsViewModel(doc);
+            vm._reinforcementView.ShowDialog();
 
-            ReinforcementColumnarFoundationsWPF rcfWPF = new ReinforcementColumnarFoundationsWPF(rebarBarTypesList, rebarShapeList, rebarCoverTypesList, rebarHookTypeList);
+            //ReinforcementView rcfWPF = new ReinforcementView(rebarBarTypesList, rebarShapeList, rebarCoverTypesList, rebarHookTypeList);
 
-            rcfWPF.ShowDialog();
-            if (rcfWPF.DialogResult != true)
-            {
-                return Result.Cancelled;
-            }
+            //rcfWPF.ShowDialog();
+            //if (rcfWPF.DialogResult != true)
+            //{
+            //    return Result.Cancelled;
+            //}
 
-            switch (rcfWPF.SelectedReinforcementTypeButtonName)
-            {
-                case "buttonType1":
-                    ReinforcementColumnarFoundationsT1 reinforcementColumnarFoundationsT1 = new ReinforcementColumnarFoundationsT1();
-                    reinforcementColumnarFoundationsT1.Execute(commandData.Application
-                        , doc
-                        , foundationsList
-                        , rcfWPF);
-                    break;
-            }
+            //switch (rcfWPF.SelectedReinforcementTypeButtonName)
+            //{
+            //    case "buttonType1":
+            //        ReinforcementColumnarFoundationsT1 reinforcementColumnarFoundationsT1 = new ReinforcementColumnarFoundationsT1();
+            //        reinforcementColumnarFoundationsT1.Execute(commandData.Application
+            //            , doc
+            //            , foundationsList
+            //            , rcfWPF);
+            //        break;
+            //}
 
             return Result.Succeeded;
         }
