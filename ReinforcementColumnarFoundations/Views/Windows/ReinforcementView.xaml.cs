@@ -15,7 +15,6 @@ namespace ReinforcementColumnarFoundations.Views.Windows
     /// </summary>
     public partial class ReinforcementView : Window
     {
-        public string SelectedReinforcementTypeButtonName;
 
         public double StepIndirectRebar;
         public double StepLateralRebar;
@@ -34,66 +33,10 @@ namespace ReinforcementColumnarFoundations.Views.Windows
         public RebarCoverType SupracolumnRebarBarCoverType;
         public RebarCoverType BottomRebarCoverType;
 
-        public RebarShape Form01;
-        public RebarShape Form26;
-        public RebarShape Form11;
-        public RebarShape Form21;
-        public RebarShape Form51;
-
-        public RebarHookType RebarHookTypeForStirrup;
-
-
-        RainforcementColumnarFoundationsSettings ReinforcementColumnarFoundationsSettingsItem;
-        RainforcementColumnarFoundationsSettingsT1 ReinforcementColumnarFoundationsSettingsT1Item;
-
         public ReinforcementView()
         {
-            ReinforcementColumnarFoundationsSettingsItem = new RainforcementColumnarFoundationsSettings().GetSettings();
-            ReinforcementColumnarFoundationsSettingsT1Item = new RainforcementColumnarFoundationsSettingsT1().GetSettings();
 
             InitializeComponent();
-
-            //comboBox_IndirectBarTapes.ItemsSource = RebarBarTypesList;
-            //comboBox_IndirectBarTapes.DisplayMemberPath = "Name";
-
-            ////comboBox_FirstBarTapes.ItemsSource = RebarBarTypesList;
-            ////comboBox_FirstBarTapes.DisplayMemberPath = "Name";
-
-            //comboBox_LateralBarTapes.ItemsSource = RebarBarTypesList;
-            //comboBox_LateralBarTapes.DisplayMemberPath = "Name";
-
-            //comboBox_SecondBarTapes.ItemsSource = RebarBarTypesList;
-            //comboBox_SecondBarTapes.DisplayMemberPath = "Name";
-
-            //comboBox_BottomBarTapes.ItemsSource = RebarBarTypesList;
-            //comboBox_BottomBarTapes.DisplayMemberPath = "Name";
-
-            //comboBox_FirstStirrupBarTapes.ItemsSource = RebarBarTypesList;
-            //comboBox_FirstStirrupBarTapes.DisplayMemberPath = "Name";
-
-            //comboBox_RebarCoverTypes.ItemsSource = RebarCoverTypesList;
-            //comboBox_RebarCoverTypes.DisplayMemberPath = "Name";
-
-            //comboBox_RebarCoverBottom.ItemsSource = RebarCoverTypesList;
-            //comboBox_RebarCoverBottom.DisplayMemberPath = "Name";
-
-            //comboBox_Form01.ItemsSource = RebarShapeList;
-            //comboBox_Form01.DisplayMemberPath = "Name";
-
-            //comboBox_Form26.ItemsSource = RebarShapeList;
-            //comboBox_Form26.DisplayMemberPath = "Name";
-
-            //comboBox_Form11.ItemsSource = RebarShapeList;
-            //comboBox_Form11.DisplayMemberPath = "Name";
-
-            //comboBox_Form21.ItemsSource = RebarShapeList;
-            //comboBox_Form21.DisplayMemberPath = "Name";
-
-            //comboBox_Form51.ItemsSource = RebarShapeList;
-            //comboBox_Form51.DisplayMemberPath = "Name";
-
-            //comboBox_RebarHookType.ItemsSource = RebarHookTypeList;
-            //comboBox_RebarHookType.DisplayMemberPath = "Name";
 
             //if (ReinforcementColumnarFoundationsSettingsItem != null)
             //{
@@ -298,14 +241,6 @@ namespace ReinforcementColumnarFoundations.Views.Windows
         //        textBox_CountX.Text = ReinforcementColumnarFoundationsSettingsT1Item.CountX.ToString();
         //        textBox_CountY.Text = ReinforcementColumnarFoundationsSettingsT1Item.CountY.ToString();
         //    }
-        //}
-
-
-        //private void btn_Ok_Click(object sender, RoutedEventArgs e)
-        //{
-        //    SaveSettings();
-        //    DialogResult = true;
-        //    Close();
         //}
 
         //private static void SetBorderForSelectedButton(object sender)

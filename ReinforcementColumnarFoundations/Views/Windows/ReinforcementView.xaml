@@ -264,6 +264,7 @@
                         <ComboBox 
                             x:Name="comboBox_Form01"
                             ItemsSource="{Binding RebarShapesList}"
+                            SelectedItem="{Binding Form01, Mode=TwoWay}"
                             DisplayMemberPath="Name"
                             Margin="10,87,10,0" 
                             VerticalAlignment="Top" 
