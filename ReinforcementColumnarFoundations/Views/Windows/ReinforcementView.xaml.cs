@@ -308,12 +308,6 @@ namespace ReinforcementColumnarFoundations.Views.Windows
         //    Close();
         //}
 
-        //private void btn_Cancel_Click(object sender, RoutedEventArgs e)
-        //{
-        //    DialogResult = false;
-        //    Close();
-        //}
-
         //private static void SetBorderForSelectedButton(object sender)
         //{
         //    BrushConverter bc = new BrushConverter();
