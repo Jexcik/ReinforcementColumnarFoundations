@@ -7,7 +7,11 @@ using ReinforcementColumnarFoundations.ViewModels.Base;
 using ReinforcementColumnarFoundations.Views.Windows;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace ReinforcementColumnarFoundations.ViewModels
 {
@@ -33,7 +37,20 @@ namespace ReinforcementColumnarFoundations.ViewModels
                     {
                         DataContext = this
                     };
+
+                    //if (ReinforcementColumnarFoundationsSettingsItem != null)
+                    //{
+                    //    switch (ReinforcementColumnarFoundationsSettingsItem.SelectedTypeButtonName)
+                    //    {
+                    //        case "buttonType1": _reinforcementView.buttonType1.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent)); break;
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    _reinforcementView.buttonType1.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                    //}
                 }
+
                 return reinforcementView;
             }
             set
@@ -42,7 +59,6 @@ namespace ReinforcementColumnarFoundations.ViewModels
                 OnPropertyChanged(nameof(_reinforcementView));
             }
         }
-
 
         #region Заголовок окна
         private string _Title = "Армирование столбчатых фундаментов";
@@ -67,6 +83,7 @@ namespace ReinforcementColumnarFoundations.ViewModels
         public ICommand CloseWindowCommand { get; }
         private void CloseWindow(object parameter)
         {
+            _reinforcementView.DialogResult = false;
             _reinforcementView.Close();
         }
 
@@ -78,27 +95,66 @@ namespace ReinforcementColumnarFoundations.ViewModels
             _reinforcementView.Close();
         }
 
-        public ICommand ButtonType1_Click { get; }
+        private ICommand _buttonType1_Click;
+        public ICommand ButtonType1_Click
+        {
+            get
+            {
+                return _buttonType1_Click = new RelayCommand(param => buttonType1_Click(param));
+            }
+        }
         private void buttonType1_Click(object sender)
         {
-            ////SelectedReinforcementTypeButtonName = (sender as Button).Name;
-            //SetBorderForSelectedButton(sender);
+            SelectedReinforcementTypeButtonName = (sender as Button).Name;
+            SetBorderForSelectedButton(sender);
             //SetBorderForNonSelectedButtons(sender);
             SetSavedSettingsT1();
         }
+
+        private static void SetBorderForSelectedButton(object sender)
+        {
+            BrushConverter bc = new BrushConverter();
+            (sender as Button).BorderThickness = new Thickness(4, 4, 4, 4);
+        }
+
+
+        //private void SetBorderForNonSelectedButtons(object sender)
+        //{
+        //    BrushConverter bc = new BrushConverter();
+        //    IEnumerable<Button> buttonsSet = buttonsTypeGrid.Children.OfType<Button>()
+        //        .Where(b => b.Name.StartsWith("button_Type"))
+        //        .Where(b => b.Name != (sender as Button).Name);
+        //    foreach (Button btn in buttonsSet)
+        //    {
+        //        btn.BorderThickness = new Thickness(1, 1, 1, 1);
+        //    }
+        //}
+
         #endregion
 
         #region TextBox
-        private string stepIndirectRebar;
+        public double stepIndirectRebar;
         public string StepIndirectRebar
         {
-            get => stepIndirectRebar;
+            get => stepIndirectRebar.ToString();
             set
             {
-                stepIndirectRebar = value;
+                stepIndirectRebar = double.Parse(value);
                 OnPropertyChanged(nameof(StepIndirectRebar));
             }
         }
+        public double stepLateralRebar;
+        public string StepLateralRebar
+        {
+            get => stepLateralRebar.ToString();
+            set
+            {
+                stepLateralRebar = double.Parse(value);
+                OnPropertyChanged(nameof(StepLateralRebar));
+            }
+
+        }
+
         #endregion
 
         #region CheckBox
@@ -426,19 +482,19 @@ namespace ReinforcementColumnarFoundations.ViewModels
                 ReinforcementColumnarFoundationsSettingsT1Item.SupracolumnRebarBarCoverTypeName = SelectedOtherCoverType.Name;
                 ReinforcementColumnarFoundationsSettingsT1Item.BottomRebarCoverTypeName = SelectedBottomCoverType.Name;
 
-                double.TryParse(StepIndirectRebar, out double step);
+                double.TryParse(StepIndirectRebar, out stepIndirectRebar);
                 if (string.IsNullOrEmpty(StepIndirectRebar))
                 {
                     TaskDialog.Show("Revit", "Укажите шаг раскладки рядов косвенного армирования!");
                     return;
                 }
 
-                //        double.TryParse(textBox_StepLateralRebar.Text, out StepLateralRebar);
-                //        if (string.IsNullOrEmpty(textBox_StepLateralRebar.Text))
-                //        {
-                //            TaskDialog.Show("Revit", "Укажите шаг расскладки боковых стержней надколонника!");
-                //            return;
-                //        }
+                double.TryParse(StepLateralRebar, out stepLateralRebar);
+                if (string.IsNullOrEmpty(StepLateralRebar))
+                {
+                    TaskDialog.Show("Revit", "Укажите шаг расскладки боковых стержней надколонника!");
+                    return;
+                }
 
                 //        int.TryParse(textBox_CountX.Text, out CountX);
                 //        if (string.IsNullOrEmpty(textBox_CountX.Text))
@@ -455,8 +511,8 @@ namespace ReinforcementColumnarFoundations.ViewModels
                 //        }
 
 
-                //        ReinforcementColumnarFoundationsSettingsT1Item.StepIndirectRebar = StepIndirectRebar;
-                //        ReinforcementColumnarFoundationsSettingsT1Item.StepLateralRebar = StepLateralRebar;
+                ReinforcementColumnarFoundationsSettingsT1Item.StepIndirectRebar = stepIndirectRebar;
+                ReinforcementColumnarFoundationsSettingsT1Item.StepLateralRebar = stepLateralRebar;
 
                 //        ReinforcementColumnarFoundationsSettingsT1Item.CountX = CountX;
                 //        ReinforcementColumnarFoundationsSettingsT1Item.CountY = CountY;
@@ -640,13 +696,12 @@ namespace ReinforcementColumnarFoundations.ViewModels
                     }
                 }
                 StepIndirectRebar = ReinforcementColumnarFoundationsSettingsT1Item.StepIndirectRebar.ToString();
-                //        textBox_StepLateralRebar.Text = ReinforcementColumnarFoundationsSettingsT1Item.StepLateralRebar.ToString();
+                StepLateralRebar = ReinforcementColumnarFoundationsSettingsT1Item.StepLateralRebar.ToString();
 
                 //        textBox_CountX.Text = ReinforcementColumnarFoundationsSettingsT1Item.CountX.ToString();
                 //        textBox_CountY.Text = ReinforcementColumnarFoundationsSettingsT1Item.CountY.ToString();
             }
         }
-
 
 
 
@@ -662,10 +717,10 @@ namespace ReinforcementColumnarFoundations.ViewModels
 
             CloseWindowCommand = new RelayCommand(CloseWindow, p => true);
             OkCommand = new RelayCommand(OkWindow, p => true);
-            ButtonType1_Click = new RelayCommand(buttonType1_Click, p => true);
 
             ReinforcementColumnarFoundationsSettingsItem = new RainforcementColumnarFoundationsSettings().GetSettings();
             ReinforcementColumnarFoundationsSettingsT1Item = new RainforcementColumnarFoundationsSettingsT1().GetSettings();
+            _reinforcementView.ShowDialog();
         }
     }
 }

@@ -21,13 +21,6 @@ namespace ReinforcementColumnarFoundations
             Document doc = commandData.Application.ActiveUIDocument.Document;
             Selection sel = commandData.Application.ActiveUIDocument.Selection;
 
-            //Список типов для выбора арматуры
-            List<RebarBarType> rebarBarTypesList = new FilteredElementCollector(doc)
-                .OfClass(typeof(RebarBarType))
-                .Cast<RebarBarType>()
-                .OrderBy(rbt => rbt.Name)
-                .ToList();
-
             List<FamilyInstance> foundationsList = GetFoundationsFromCurrentSelection(doc, sel);
 
             if (foundationsList.Count == 0)
@@ -49,26 +42,21 @@ namespace ReinforcementColumnarFoundations
             }
 
             var vm = new ReinforcementColumnarFoundationsViewModel(doc);
-            vm._reinforcementView.ShowDialog();
 
-            //ReinforcementView rcfWPF = new ReinforcementView(rebarBarTypesList, rebarShapeList, rebarCoverTypesList, rebarHookTypeList);
+            if (vm._reinforcementView.DialogResult != true)
+            {
+                return Result.Cancelled;
+            }
 
-            //rcfWPF.ShowDialog();
-            //if (rcfWPF.DialogResult != true)
-            //{
-            //    return Result.Cancelled;
-            //}
+            switch (vm.SelectedReinforcementTypeButtonName)
+            {
+                case "buttonType1":
+                    ReinforcementColumnarFoundationsT1 reinforcementColumnarFoundationsT1 = new ReinforcementColumnarFoundationsT1();
+                    reinforcementColumnarFoundationsT1.Execute(commandData.Application, doc, foundationsList, vm);
+                    break;
+            }
 
-            //switch (rcfWPF.SelectedReinforcementTypeButtonName)
-            //{
-            //    case "buttonType1":
-            //        ReinforcementColumnarFoundationsT1 reinforcementColumnarFoundationsT1 = new ReinforcementColumnarFoundationsT1();
-            //        reinforcementColumnarFoundationsT1.Execute(commandData.Application
-            //            , doc
-            //            , foundationsList
-            //            , rcfWPF);
-            //        break;
-            //}
+
 
             return Result.Succeeded;
         }
