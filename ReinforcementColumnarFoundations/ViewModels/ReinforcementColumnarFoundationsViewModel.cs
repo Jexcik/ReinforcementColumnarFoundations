@@ -174,6 +174,7 @@ namespace ReinforcementColumnarFoundations.ViewModels
         #endregion
 
         #region ComboBox
+        #region Form
         private RebarShape form01;
         public RebarShape Form01
         {
@@ -224,7 +225,7 @@ namespace ReinforcementColumnarFoundations.ViewModels
                 OnPropertyChanged(nameof(Form51));
             }
         }
-
+        #endregion
         #region RebarBarType
         private RebarBarType selectedFirstRebarType;
         public RebarBarType SelectedFirstRebarType
@@ -377,7 +378,6 @@ namespace ReinforcementColumnarFoundations.ViewModels
             }
         }
         #endregion
-
         #endregion
 
         private void SaveSettings()

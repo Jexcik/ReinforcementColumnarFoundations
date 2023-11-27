@@ -54,10 +54,10 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlphanumComparatorFastString.cs" />
+    <Compile Include="Models\AlphanumComparatorFastString.cs" />
     <Compile Include="App.cs" />
     <Compile Include="Models\Foundation.cs" />
-    <Compile Include="FoundationSelectionFilter.cs" />
+    <Compile Include="Models\FoundationSelectionFilter.cs" />
     <Compile Include="Infrastructure\Commands\Base\Command.cs" />
     <Compile Include="Infrastructure\Commands\RelayCommand.cs" />
     <Compile Include="Models\RebarModel.cs" />
@@ -67,8 +67,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
-    <Compile Include="RainforcementColumnarFoundationsSettings.cs" />
-    <Compile Include="RainforcementColumnarFoundationsSettingsT1.cs" />
+    <Compile Include="Models\RainforcementColumnarFoundationsSettings.cs" />
+    <Compile Include="Models\RainforcementColumnarFoundationsSettingsT1.cs" />
     <Compile Include="ReinforcementColumnarFoundationsCommand.cs" />
     <Compile Include="ReinforcementColumnarFoundationsT1.cs" />
     <Compile Include="ViewModels\Base\ViewModel.cs" />

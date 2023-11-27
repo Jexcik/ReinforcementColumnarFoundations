@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 //using DocumentFormat.OpenXml.Wordprocessing;
 //using Word = Microsoft.Office.Interop.Word;
 
-namespace ReinforcementColumnarFoundations
+namespace ReinforcementColumnarFoundations.Models
 {
     public class RainforcementColumnarFoundationsSettingsT1
     {

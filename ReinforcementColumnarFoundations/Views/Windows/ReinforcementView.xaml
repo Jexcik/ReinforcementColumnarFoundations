@@ -110,6 +110,8 @@
                         <ComboBox 
                             x:Name="comboBox_SecondBarTapes"
                             ItemsSource="{Binding RebarBarTypeList}"
+                            SelectedItem="{Binding Path=SelectedFirstRebarType, Mode=TwoWay}"
+                            IsEnabled="False"
                             DisplayMemberPath="Name"
                             HorizontalAlignment="Right" 
                             VerticalAlignment="Top" 
@@ -126,10 +128,10 @@
                             SelectedItem="{Binding SelectedBottomMainBarType}"
                             HorizontalAlignment="Left" 
                             VerticalAlignment="Bottom" 
-                            Width="100" Height="25" 
+                            Width="110" Height="25" 
                             Grid.Column="0" 
                             Grid.Row="1" 
-                            Margin="10,0,0,130">
+                            Margin="5,0,0,130">
                         </ComboBox>
 
                         <ComboBox 

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ReinforcementColumnarFoundations
+namespace ReinforcementColumnarFoundations.Models
 {
     public class FoundationSelectionFilter : ISelectionFilter
     {

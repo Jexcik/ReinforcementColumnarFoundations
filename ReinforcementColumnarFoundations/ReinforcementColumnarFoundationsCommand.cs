@@ -1,15 +1,9 @@
 ﻿using Autodesk.Revit.DB;
-using Autodesk.Revit.DB.Structure;
 using Autodesk.Revit.UI;
 using Autodesk.Revit.UI.Selection;
+using ReinforcementColumnarFoundations.Models;
 using ReinforcementColumnarFoundations.ViewModels;
-using ReinforcementColumnarFoundations.Views.Windows;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace ReinforcementColumnarFoundations
 {
@@ -55,8 +49,6 @@ namespace ReinforcementColumnarFoundations
                     reinforcementColumnarFoundationsT1.Execute(commandData.Application, doc, foundationsList, vm);
                     break;
             }
-
-
 
             return Result.Succeeded;
         }
