@@ -60,18 +60,6 @@
                             <Image RenderOptions.BitmapScalingMode="Fant" 
                                    Source="/ReinforcementColumnarFoundations;component/Resources/Надколонник_Армирование_Тип1.png" />
                         </Button>
-                        <ItemsControl>
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <Canvas/>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Ellipse Fill="Blue" Width="10" Height="10"></Ellipse>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
 
                         <Label 
                             Content="Кол-во по Y" 
@@ -262,6 +250,28 @@
                             Source="/ReinforcementColumnarFoundations;component/Resources/Надколонник_Армирование.png" 
                             Margin="110,10,105,0"/>
                     </Grid>
+
+                    <ComboBox 
+                        Grid.Column="1" 
+                        Width="150"
+                        Height="150">
+                        <ComboBoxItem>
+                            <StackPanel Orientation="Vertical">
+                                <Button 
+                                    Content="Кнопка 1"
+                                    Width="150"
+                                    Height="150"
+                                    BorderBrush="#FF707070"
+                                    HorizontalAlignment="Center"/>
+                                <Button 
+                                    Content="Кнопка 2"
+                                    Width="150"
+                                    Height="150"
+                                    BorderBrush="#FF707070"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                    </ComboBox>
+
                 </Grid>
             </TabItem>
             <TabItem Header="Формы и соединения">
@@ -445,5 +455,6 @@
             Height="25" 
             Grid.Row="1"
             />
+
     </Grid>
 </Window>
