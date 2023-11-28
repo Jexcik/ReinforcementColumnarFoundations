@@ -60,6 +60,18 @@
                             <Image RenderOptions.BitmapScalingMode="Fant" 
                                    Source="/ReinforcementColumnarFoundations;component/Resources/Надколонник_Армирование_Тип1.png" />
                         </Button>
+                        <ItemsControl>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <Canvas/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Ellipse Fill="Blue" Width="10" Height="10"></Ellipse>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
 
                         <Label 
                             Content="Кол-во по Y" 
