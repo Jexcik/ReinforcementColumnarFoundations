@@ -40,28 +40,79 @@
 
                         <Label 
                             x:Name="label_Type1" 
-                            Content="Тип 1" 
+                            Content="Тип армирования" 
                             HorizontalAlignment="Left" 
-                            Margin="45,10,0,0" 
+                            Margin="21,10,0,0" 
                             VerticalAlignment="Top"
                             />
 
-                        <Button 
-                            x:Name="buttonType1"
-                            Command="{Binding Path=ButtonType1_Click}"
-                            CommandParameter="{Binding ElementName=buttonType1}"
+                        <ComboBox 
+                            SelectedIndex="0"
+                            Width="120" 
+                            Height="100" 
                             HorizontalAlignment="Left" 
                             VerticalAlignment="Top" 
-                            Margin="20,35,0,0" 
-                            Width="90" Height="90" 
-                            BorderBrush="#FF707070" 
-                            BorderThickness="1,1,1,1" 
-                            Grid.Row="0">
-                            <Image RenderOptions.BitmapScalingMode="Fant" 
-                                   Source="/ReinforcementColumnarFoundations;component/Resources/Надколонник_Армирование_Тип1.png" />
-                        </Button>
+                            Margin="20,35,0,0"
+                            BorderBrush="Black"
+                            BorderThickness="1,1,1,1">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Button 
+                                        Content="{Binding Content}" 
+                                        Command="{Binding Command}" 
+                                        HorizontalContentAlignment="Left">
+                                            <Button.Template>
+                                                <ControlTemplate 
+                                                TargetType="Button">
+                                                    <StackPanel Orientation="Vertical">
+                                                        <Image Source="{Binding ImageSource}" Width="150" Height="150"/>
+                                                        <ContentPresenter Margin="5,0,0,0" Content="{TemplateBinding Content}"/>
+                                                    </StackPanel>
+                                                </ControlTemplate>
+                                            </Button.Template>
+                                        </Button>
+                                        <TextBlock Text="Тип 1" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                            <ComboBoxItem>
+                                <Button 
+                                    x:Name="buttonType1"
+                                    Command="{Binding Path=ButtonType1_Click}"
+                                    CommandParameter="{Binding ElementName=buttonType1}"
+                                    HorizontalAlignment="Left" 
+                                    VerticalAlignment="Top" 
+                                    Width="90" Height="90" 
+                                    BorderBrush="Black"
+                                    BorderThickness="0,0,0,0" 
+                                    Grid.Row="0">
+                                    <Image RenderOptions.BitmapScalingMode="Fant" Source="/ReinforcementColumnarFoundations;component/Resources/Надколонник_Армирование_Тип1.png" 
+                                        Width="auto" 
+                                        Height="auto">
+                                    </Image>
+                                </Button>
+                            </ComboBoxItem>
+                            <ComboBoxItem>
+                                <Button x:Name="buttonType2"
+                                        Command="{Binding Path=ButtonType2_Click}"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        Width="90" Height="90"
+                                        BorderBrush="Black"
+                                        BorderThickness="0,0,0,0" 
+                                        Grid.Row="0">
+                                    <Image RenderOptions.BitmapScalingMode="Fant" Source="/ReinforcementColumnarFoundations;component/Resources/Надколонник_Армирование_Тип2.png" 
+                                        Width="auto" 
+                                        Height="auto">
+                                    </Image>
+                                </Button>
+                            </ComboBoxItem>
+                        </ComboBox>
 
-                        <Label 
+
+
+                        <!--<Label 
                             Content="Кол-во по Y" 
                             HorizontalAlignment="Left" 
                             Margin="135,76,0,76"/>
@@ -84,7 +135,7 @@
                             HorizontalAlignment="Left" 
                             Width="40" Height="25"
                             Margin="216,41,0,121"
-                            />
+                            />-->
 
                         <ComboBox 
                             x:Name="comboBox_FirstBarTapes" 
@@ -250,28 +301,6 @@
                             Source="/ReinforcementColumnarFoundations;component/Resources/Надколонник_Армирование.png" 
                             Margin="110,10,105,0"/>
                     </Grid>
-
-                    <ComboBox 
-                        Grid.Column="1" 
-                        Width="150"
-                        Height="150">
-                        <ComboBoxItem>
-                            <StackPanel Orientation="Vertical">
-                                <Button 
-                                    Content="Кнопка 1"
-                                    Width="150"
-                                    Height="150"
-                                    BorderBrush="#FF707070"
-                                    HorizontalAlignment="Center"/>
-                                <Button 
-                                    Content="Кнопка 2"
-                                    Width="150"
-                                    Height="150"
-                                    BorderBrush="#FF707070"/>
-                            </StackPanel>
-                        </ComboBoxItem>
-                    </ComboBox>
-
                 </Grid>
             </TabItem>
             <TabItem Header="Формы и соединения">

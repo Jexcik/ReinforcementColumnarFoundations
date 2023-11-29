@@ -20,6 +20,5 @@ namespace ReinforcementColumnarFoundations.Views.Windows
 
             InitializeComponent();
         }
-
     }
 }

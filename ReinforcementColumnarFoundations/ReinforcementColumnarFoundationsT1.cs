@@ -171,7 +171,7 @@ namespace ReinforcementColumnarFoundations
                         //Точки для построения кривых стержня
                         XYZ rebar_p1 = new XYZ(Math.Round(foundationProperty.FoundationBasePoint.X - foundationProperty.ColumnLength / 2 + 25 / 304.8, 6)
                             , Math.Round(foundationProperty.FoundationBasePoint.Y - foundationProperty.ColumnWidth / 2 - lateralBarDiam / 2 + coverDistance / 1.000000000000001, 6)
-                            , Math.Round((foundationProperty.FoundationBasePoint.Z - 100 / 304.8) + foundationProperty.FoundationLength, 6));
+                            , Math.Round((foundationProperty.FoundationBasePoint.Z - 75 / 304.8) + foundationProperty.FoundationLength, 6));
                         XYZ rebar_p2 = new XYZ(Math.Round(rebar_p1.X + foundationProperty.ColumnLength - 50 / 304.8, 6)
                             , Math.Round(rebar_p1.Y, 6)
                             , Math.Round(rebar_p1.Z, 6));
@@ -213,7 +213,7 @@ namespace ReinforcementColumnarFoundations
                         //Точки для построения кривых стержня
                         XYZ rebar_p1 = new XYZ(Math.Round(foundationProperty.FoundationBasePoint.X - foundationProperty.ColumnLength / 2 + coverDistance - lateralBarDiam / 2, 6)
                             , Math.Round(foundationProperty.FoundationBasePoint.Y - foundationProperty.ColumnWidth / 2 + 25 / 304.8, 6)
-                            , Math.Round(foundationProperty.FoundationBasePoint.Z - 100 / 304.8 + foundationProperty.FoundationLength - lateralBarDiam, 6));
+                            , Math.Round(foundationProperty.FoundationBasePoint.Z - 75 / 304.8 + foundationProperty.FoundationLength - lateralBarDiam, 6));
                         XYZ rebar_p2 = new XYZ(Math.Round(rebar_p1.X, 6)
                             , Math.Round(rebar_p1.Y + foundationProperty.ColumnWidth - 50 / 308.8, 6)
                             , Math.Round(rebar_p1.Z, 6));
@@ -337,11 +337,11 @@ namespace ReinforcementColumnarFoundations
                         try
                         {
                             //Точки для построение П стержней
-                            XYZ rebar_p1 = new XYZ(Math.Round(foundationProperty.FoundationBasePoint.X - foundationProperty.Ledge1Length / 2 + 500 / 304.8, 6)
+                            XYZ rebar_p1 = new XYZ(Math.Round(foundationProperty.FoundationBasePoint.X - foundationProperty.Ledge1Length / 2 + foundationProperty.Ledge1Height * 2 + coverDistance + bottomMaimBarDiam / 2, 6)
                                 , Math.Round(foundationProperty.FoundationBasePoint.Y - foundationProperty.Ledge1Width / 2 + bottomMaimBarDiam / 2, 6)
                                 , Math.Round(foundationProperty.FoundationBasePoint.Z + 1.5 * bottomMaimBarDiam + bottomCoverDistance, 6));
 
-                            XYZ rebar_p2 = new XYZ(Math.Round(rebar_p1.X + coverDistance - 500 / 304.8, 6)
+                            XYZ rebar_p2 = new XYZ(Math.Round(rebar_p1.X - 2 * foundationProperty.Ledge1Height, 6)
                                 , Math.Round(rebar_p1.Y, 6)
                                 , Math.Round(rebar_p1.Z, 6));
 
@@ -379,10 +379,67 @@ namespace ReinforcementColumnarFoundations
                             MainRebar_1.get_Parameter(BuiltInParameter.REBAR_ELEM_LAYOUT_RULE).Set(2);
                             MainRebar_1.get_Parameter(BuiltInParameter.REBAR_ELEM_BAR_SPACING).Set(200 / 304.8);
                             ElementTransformUtils.MoveElement(doc, MainRebar_1.Id, new XYZ(0, bottomMaimBarDiam, 0));
+
+                            var elementRotate = ElementTransformUtils.CopyElement(doc, MainRebar_1.Id, new XYZ(0, 0, 0));
+                            ElementTransformUtils.RotateElements(doc, elementRotate, rotateLineBase, 180 * (Math.PI / 180));
+
                         }
                         catch
                         {
-                            TaskDialog.Show("Revit", "Не удалось создать обрамляющую арматуру!");
+                            TaskDialog.Show("Revit", "Не удалось создать арматуру по торцам подошвы!");
+                            return Result.Cancelled;
+                        }
+                        try
+                        {
+
+                            XYZ rebar_p1 = new XYZ(Math.Round(foundationProperty.FoundationBasePoint.X + foundationProperty.Ledge1Length / 2 - bottomMaimBarDiam / 2, 6)
+                                , Math.Round(foundationProperty.FoundationBasePoint.Y - foundationProperty.Ledge1Width / 2 + 2 * foundationProperty.Ledge1Height + coverDistance - bottomMaimBarDiam / 2, 6)
+                                , Math.Round(foundationProperty.FoundationBasePoint.Z + bottomMaimBarDiam / 2 + bottomCoverDistance, 6));
+
+                            XYZ rebar_p2 = new XYZ(Math.Round(rebar_p1.X, 6)
+                                , Math.Round(rebar_p1.Y - 2 * foundationProperty.Ledge1Height, 6)
+                                , Math.Round(rebar_p1.Z, 6));
+
+                            XYZ rebar_p3 = new XYZ(Math.Round(rebar_p1.X, 6)
+                                , Math.Round(rebar_p2.Y, 6)
+                                , Math.Round(rebar_p2.Z + foundationProperty.Ledge1Height - (2 * bottomMaimBarDiam + 2 * bottomCoverDistance), 6));
+
+                            XYZ rebar_p4 = new XYZ(Math.Round(rebar_p1.X, 6)
+                                , Math.Round(rebar_p1.Y, 6)
+                                , Math.Round(rebar_p3.Z, 6));
+
+                            //Кривые стержня
+                            List<Curve> mainRebarCurves = new List<Curve>();
+                            Curve line1 = Line.CreateBound(rebar_p1, rebar_p2) as Curve;
+                            mainRebarCurves.Add(line1);
+                            Curve line2 = Line.CreateBound(rebar_p2, rebar_p3) as Curve;
+                            mainRebarCurves.Add(line2);
+                            Curve line3 = Line.CreateBound(rebar_p3, rebar_p4) as Curve;
+                            mainRebarCurves.Add(line3);
+
+                            //Армирование подошвы фундамента по X
+                            MainRebar_1 = Rebar.CreateFromCurvesAndShape(doc
+                                , form21
+                                , bottomMainBarType
+                                , null
+                                , null
+                                , foundation
+                                , XYZ.BasisX
+                                , mainRebarCurves
+                                , RebarHookOrientation.Right
+                                , RebarHookOrientation.Right);
+
+                            ElementTransformUtils.RotateElement(doc, MainRebar_1.Id, rotateLineBase, (foundation.Location as LocationPoint).Rotation);
+                            MainRebar_1.get_Parameter(BuiltInParameter.REBAR_ELEM_LAYOUT_RULE).Set(2);
+                            MainRebar_1.get_Parameter(BuiltInParameter.REBAR_ELEM_BAR_SPACING).Set(200 / 304.8);
+                            ElementTransformUtils.MoveElement(doc, MainRebar_1.Id, new XYZ(-bottomMaimBarDiam, 0, 0));
+
+                            var elementRotate = ElementTransformUtils.CopyElement(doc, MainRebar_1.Id, new XYZ(0, 0, 0));
+                            ElementTransformUtils.RotateElements(doc, elementRotate, rotateLineBase, 180 * (Math.PI / 180));
+                        }
+                        catch
+                        {
+                            TaskDialog.Show("Revit", "Не удалось создать арматуру по торцам подошвы!");
                             return Result.Cancelled;
                         }
                     }

@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -109,6 +108,14 @@ namespace ReinforcementColumnarFoundations.ViewModels
             SetBorderForSelectedButton(sender);
             //SetBorderForNonSelectedButtons(sender);
             SetSavedSettingsT1();
+        }
+
+        public ICommand ButtonType2_Click
+        {
+            get 
+            {
+                return new RelayCommand(param => buttonType1_Click(param));
+            }
         }
 
         private static void SetBorderForSelectedButton(object sender)
@@ -482,6 +489,8 @@ namespace ReinforcementColumnarFoundations.ViewModels
                 ReinforcementColumnarFoundationsSettingsT1Item.SupracolumnRebarBarCoverTypeName = SelectedOtherCoverType.Name;
                 ReinforcementColumnarFoundationsSettingsT1Item.BottomRebarCoverTypeName = SelectedBottomCoverType.Name;
 
+                ReinforcementColumnarFoundationsSettingsT1Item.IsUpperMesh = IsCheckedUpperReinforce;
+
                 double.TryParse(StepIndirectRebar, out stepIndirectRebar);
                 if (string.IsNullOrEmpty(StepIndirectRebar))
                 {
@@ -697,6 +706,8 @@ namespace ReinforcementColumnarFoundations.ViewModels
                 }
                 StepIndirectRebar = ReinforcementColumnarFoundationsSettingsT1Item.StepIndirectRebar.ToString();
                 StepLateralRebar = ReinforcementColumnarFoundationsSettingsT1Item.StepLateralRebar.ToString();
+
+                IsCheckedUpperReinforce = ReinforcementColumnarFoundationsSettingsT1Item.IsUpperMesh;
 
                 //        textBox_CountX.Text = ReinforcementColumnarFoundationsSettingsT1Item.CountX.ToString();
                 //        textBox_CountY.Text = ReinforcementColumnarFoundationsSettingsT1Item.CountY.ToString();

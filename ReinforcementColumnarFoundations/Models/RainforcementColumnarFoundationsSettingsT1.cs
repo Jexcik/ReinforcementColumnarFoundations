@@ -31,6 +31,8 @@ namespace ReinforcementColumnarFoundations.Models
         public string SupracolumnRebarBarCoverTypeName { get; set; }
         public string BottomRebarCoverTypeName { get; set; }
 
+        public bool IsUpperMesh { get; set; }
+
         public RainforcementColumnarFoundationsSettingsT1 GetSettings()
         {
             RainforcementColumnarFoundationsSettingsT1 rainforcementColumnarFoundationsSettingsT1 = null;

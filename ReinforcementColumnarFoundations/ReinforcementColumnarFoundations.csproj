@@ -100,7 +100,9 @@
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Надколонник_Армирование_Тип2.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\RebarForms\21.png" />
   </ItemGroup>
