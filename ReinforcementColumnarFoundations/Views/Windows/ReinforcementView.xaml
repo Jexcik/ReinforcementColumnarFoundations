@@ -12,7 +12,7 @@
 
     <Grid>
         <TabControl x:Name="tabControl" Margin="1,0,1,45">
-            <TabItem Header="Геометрия">
+            <TabItem Header="Армирование">
                 <Grid RenderTransformOrigin="0.496,0.532">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="350*"/>
@@ -109,33 +109,6 @@
                                 </Button>
                             </ComboBoxItem>
                         </ComboBox>
-
-
-
-                        <!--<Label 
-                            Content="Кол-во по Y" 
-                            HorizontalAlignment="Left" 
-                            Margin="135,76,0,76"/>
-
-                        <TextBox 
-                            x:Name="textBox_CountY" 
-                            HorizontalAlignment="Left" 
-                            Width="40" Height="25" 
-                            Margin="216,81,0,81"
-                            />
-
-                        <Label 
-                            Content="Кол-во по X" 
-                            HorizontalAlignment="Left" 
-                            Margin="134,41,0,113"
-                            />
-
-                        <TextBox 
-                            x:Name="textBox_CountX" 
-                            HorizontalAlignment="Left" 
-                            Width="40" Height="25"
-                            Margin="216,41,0,121"
-                            />-->
 
                         <ComboBox 
                             x:Name="comboBox_FirstBarTapes" 
@@ -301,9 +274,233 @@
                             Source="/ReinforcementColumnarFoundations;component/Resources/Надколонник_Армирование.png" 
                             Margin="110,10,105,0"/>
                     </Grid>
+
+                    <Label
+                        x:Name="label_Form01"
+                        Grid.Column="1"
+                        Content="Форма 01" 
+                        HorizontalAlignment="Left" 
+                        VerticalAlignment="Top"
+                        Margin="155,0,0,0"/>
+
+                    <Image 
+                        x:Name="image_Form01"
+                        Grid.Column="1"
+                        Height="75" 
+                        Margin="10,0,10,0" 
+                        VerticalAlignment="Top" 
+                        RenderOptions.BitmapScalingMode="Fant" 
+                        Source="/ReinforcementColumnarFoundations;component/Resources/RebarForms/01.png"/>
+
+                    <ComboBox 
+                        x:Name="comboBox_Form01" 
+                        Grid.Column="1" 
+                        ItemsSource="{Binding RebarShapesList}"
+                        SelectedItem="{Binding Form01, Mode=TwoWay}"
+                        DisplayMemberPath="Name"
+                        Margin="83,50,75,0" 
+                        VerticalAlignment="Top" 
+                        Height="25"
+                        Width="207.5"
+                        VerticalContentAlignment="Center"
+                        HorizontalAlignment="Center"/>
+
+                    <GridSplitter 
+                        Grid.Column="1"
+                        Height="1" 
+                        HorizontalAlignment="Stretch" 
+                        VerticalAlignment="Top" 
+                        Background="#FFACACAC" Margin="0,90,0,0"/>
+
+                    <Label 
+                        x:Name="label_Form26" 
+                        Grid.Column="1"
+                        Content="Форма 26"
+                        HorizontalAlignment="Left"
+                        Margin="155,85,0,0"
+                        VerticalAlignment="Top"/>
+
+                    <Image 
+                        x:Name="image_Form26"
+                        Grid.Column="1"
+                        Height="75" 
+                        Margin="10,100,11,0" 
+                        VerticalAlignment="Top"
+                        RenderOptions.BitmapScalingMode="Fant" 
+                        Panel.ZIndex="6" Source="/ReinforcementColumnarFoundations;component/Resources/Форма_26_1.png" 
+                        />
+
+                    <ComboBox 
+                        x:Name="comboBox_Form26"
+                        Grid.Column="1"
+                        ItemsSource="{Binding RebarShapesList}"
+                        SelectedItem="{Binding Form26,Mode=TwoWay}"
+                        DisplayMemberPath="Name"
+                        Margin="0,170,0,0" 
+                        VerticalAlignment="Top" 
+                        Height="25"
+                        Width="207.5"
+                        HorizontalAlignment="Center"
+                        VerticalContentAlignment="Center"/>
+
+                    <GridSplitter
+                        Height="1" 
+                        Grid.Column="1"
+                        HorizontalAlignment="Stretch" 
+                        VerticalAlignment="Top" 
+                        Background="#FFACACAC" 
+                        Grid.ColumnSpan="2" 
+                        Margin="0,205,0,0"/>
+
+                    <Label 
+                        Grid.Column="1"
+                        x:Name="label_Form11" 
+                        Content="Форма 11" 
+                        HorizontalAlignment="Left" 
+                        Margin="155,205,0,0" 
+                        VerticalAlignment="Top"/>
+
+                    <Image
+                        Grid.Column="1"
+                        x:Name="image_Form11" 
+                        Height="75" 
+                        Margin="10,210,10,0" 
+                        VerticalAlignment="Top" 
+                        RenderOptions.BitmapScalingMode="Fant" Source="/ReinforcementColumnarFoundations;component/Resources/Форма_11.png" 
+                        />
+
+                    <ComboBox 
+                        Grid.Column="1"
+                        x:Name="comboBox_Form11" 
+                        ItemsSource="{Binding RebarShapesList}"
+                        SelectedItem="{Binding Form11,Mode=TwoWay}"
+                        DisplayMemberPath="Name"
+                        VerticalAlignment="Top" 
+                        Height="25"
+                        Width="207.5"
+                        Margin="0,280,0,0"
+                        VerticalContentAlignment="Center"
+                        HorizontalAlignment="Center"/>
+
+                    <GridSplitter 
+                        Grid.Column="1"
+                        Height="1" 
+                        HorizontalAlignment="Stretch" 
+                        VerticalAlignment="Top" 
+                        Background="#FFACACAC" 
+                        Margin="0,325,0,0"/>
+
+                    <Label
+                        x:Name="label_Form51"
+                        Grid.Column="1"
+                        Content="Форма 51" 
+                        HorizontalAlignment="Left" 
+                        Margin="156,330,0,0" 
+                        VerticalAlignment="Top"/>
+
+                    <Image 
+                        x:Name="image_Form51" 
+                        Grid.Column="1"
+                        Height="76" 
+                        Margin="10,345,10,0" 
+                        VerticalAlignment="Top" 
+                        RenderOptions.BitmapScalingMode="Fant" Source="/ReinforcementColumnarFoundations;component/Resources/Форма_51.png" 
+                        />
+
+                    <ComboBox 
+                        x:Name="comboBox_Form51" 
+                        Grid.Column="1"
+                        ItemsSource="{Binding RebarShapesList}"
+                        SelectedItem="{Binding Form51,Mode=TwoWay}"
+                        DisplayMemberPath="Name"
+                        Margin="10,420,10,0" 
+                        VerticalAlignment="Top" 
+                        Height="25"
+                        Width="207.5"
+                        VerticalContentAlignment="Center"/>
+
+                    <GridSplitter 
+                        Height="1"
+                        Grid.Column="1"
+                        HorizontalAlignment="Stretch" 
+                        VerticalAlignment="Top" 
+                        Background="#FFACACAC" 
+                        Grid.ColumnSpan="2" 
+                        Margin="0,450,0,0"/>
+
+                    <Label 
+                        x:Name="label_Form21"
+                        Grid.Column="1"
+                        Content="Форма 21" 
+                        HorizontalAlignment="Center" 
+                        Margin="10,450,0,0" 
+                        VerticalAlignment="Top" 
+                        Grid.Row="4"/>
+
+                    <Image 
+                        x:Name="image_Form21" 
+                        Grid.Column="1"
+                        Height="75" 
+                        Margin="10,470,10,0" 
+                        VerticalAlignment="Top"  
+                        RenderOptions.BitmapScalingMode="Fant" 
+                        Source="/ReinforcementColumnarFoundations;component/Resources/Форма_21.png"/>
+
+                    <ComboBox 
+                        x:Name="comboBox_Form21"
+                        Grid.Column="1"
+                        ItemsSource="{Binding RebarShapesList}"
+                        SelectedItem="{Binding Form21, Mode=TwoWay}"
+                        DisplayMemberPath="Name"
+                        Margin="10,540,10,0" 
+                        VerticalAlignment="Top" 
+                        Height="25"
+                        Width="207.5"
+                        VerticalContentAlignment="Center"/>
+
+                    <GridSplitter 
+                        Height="1"
+                        Grid.Column="1"
+                        HorizontalAlignment="Stretch" 
+                        VerticalAlignment="Top" 
+                        Background="#FFACACAC" 
+                        Grid.ColumnSpan="2" 
+                        Margin="0,570,0,0"/>
+
+                    <Label 
+                        x:Name="label_RebarHookType" 
+                        Grid.Column="1"
+                        Content="Отгиб арматуры для хомутов" 
+                        HorizontalAlignment="Center"
+                        Margin="10,570,0,0" 
+                        VerticalAlignment="Top" 
+                        Grid.Row="5"/>
+
+                    <Image 
+                        x:Name="image_RebarHookType"
+                        Grid.Column="1"
+                        Height="75" 
+                        Margin="10,590,10,0" 
+                        VerticalAlignment="Top" 
+                        Grid.Row="5"  
+                        RenderOptions.BitmapScalingMode="Fant" 
+                        Source="/ReinforcementColumnarFoundations;component/Resources/RebarForms/RebarHookType.png"/>
+
+                    <ComboBox 
+                        x:Name="comboBox_RebarHookType"
+                        Grid.Column="1"
+                        ItemsSource="{Binding Path=RebarHookTypeList}"
+                        SelectedItem="{Binding SelectedHookType, Mode=TwoWay}"
+                        DisplayMemberPath="Name"
+                        Margin="10,660,10,0"
+                        VerticalAlignment="Top"
+                        Grid.Row="5" 
+                        Height="25"
+                        Width="207.5"
+                        VerticalContentAlignment="Center"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Формы и соединения">
+            <TabItem Header="Оформление и спецификации">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="24.5"/>
@@ -323,140 +520,6 @@
                             <RowDefinition Height="120*"/>
                         </Grid.RowDefinitions>
 
-                        <Label
-                            x:Name="label_Form01"
-                            Content="Форма 01" 
-                            HorizontalAlignment="Left" 
-                            Margin="10,6,0,0" 
-                            VerticalAlignment="Top"/>
-
-                        <Image 
-                            x:Name="image_Form01" 
-                            Height="75" 
-                            Margin="10,24,10,0" 
-                            VerticalAlignment="Top" 
-                            RenderOptions.BitmapScalingMode="Fant" 
-                            Source="/ReinforcementColumnarFoundations;component/Resources/RebarForms/01.png"/>
-
-                        <ComboBox 
-                            x:Name="comboBox_Form01"
-                            ItemsSource="{Binding RebarShapesList}"
-                            SelectedItem="{Binding Form01, Mode=TwoWay}"
-                            DisplayMemberPath="Name"
-                            Margin="10,87,10,0" 
-                            VerticalAlignment="Top" 
-                            Height="25" 
-                            VerticalContentAlignment="Center"/>
-
-                        <GridSplitter 
-                            Height="1" 
-                            HorizontalAlignment="Stretch" 
-                            VerticalAlignment="Bottom" 
-                            Background="#FFACACAC"/>
-
-                        <Label 
-                            x:Name="label_Form26" 
-                            Content="Форма 26" 
-                            HorizontalAlignment="Left"
-                            Margin="10,5,0,0"
-                            VerticalAlignment="Top"
-                            Grid.Row="1"/>
-
-                        <Image 
-                            x:Name="image_Form26" 
-                            Height="75" 
-                            Margin="10,24,10,0" 
-                            VerticalAlignment="Top"
-                            RenderOptions.BitmapScalingMode="Fant" 
-                            Panel.ZIndex="6" Grid.Row="1" 
-                            Source="/ReinforcementColumnarFoundations;component/Resources/RebarForms/26.png"/>
-
-                        <ComboBox 
-                            x:Name="comboBox_Form26" 
-                            ItemsSource="{Binding RebarShapesList}"
-                            SelectedItem="{Binding Form26,Mode=TwoWay}"
-                            DisplayMemberPath="Name"
-                            Margin="10,87,10,0" 
-                            VerticalAlignment="Top" 
-                            Height="25" 
-                            VerticalContentAlignment="Center" 
-                            Grid.Row="1"/>
-
-                        <GridSplitter 
-                            Height="1" 
-                            HorizontalAlignment="Stretch" 
-                            VerticalAlignment="Bottom" 
-                            Background="#FFACACAC" 
-                            Grid.Row="1"/>
-
-                        <Label 
-                            x:Name="label_Form11" 
-                            Content="Форма 11" 
-                            HorizontalAlignment="Left" 
-                            Margin="10,5,0,0" 
-                            VerticalAlignment="Top" 
-                            Grid.Row="2"/>
-
-                        <Image
-                            x:Name="image_Form11" 
-                            Height="75" 
-                            Margin="10,24,10,0" 
-                            VerticalAlignment="Top" 
-                            Grid.Row="2" 
-                            RenderOptions.BitmapScalingMode="Fant" 
-                            Source="/ReinforcementColumnarFoundations;component/Resources/RebarForms/11.png"/>
-
-                        <ComboBox 
-                            x:Name="comboBox_Form11" 
-                            ItemsSource="{Binding RebarShapesList}"
-                            SelectedItem="{Binding Form11,Mode=TwoWay}"
-                            DisplayMemberPath="Name"
-                            Margin="10,87,10,0" 
-                            VerticalAlignment="Top" 
-                            Height="25" 
-                            VerticalContentAlignment="Center" 
-                            Grid.Row="2"/>
-                        <GridSplitter Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Background="#FFACACAC" Grid.Row="2"/>
-
-                        <Label x:Name="label_Form51" Content="Форма 51" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Grid.Row="3"/>
-                        <Image x:Name="image_Form51" Height="75" Margin="10,18,10,0" VerticalAlignment="Top" Grid.Row="3"  RenderOptions.BitmapScalingMode="Fant" Source="/ReinforcementColumnarFoundations;component/Resources/RebarForms/51.png"/>
-                        <ComboBox 
-                            x:Name="comboBox_Form51" 
-                            ItemsSource="{Binding RebarShapesList}"
-                            SelectedItem="{Binding Form51,Mode=TwoWay}"
-                            DisplayMemberPath="Name"
-                            Margin="10,87,10,0" 
-                            VerticalAlignment="Top" 
-                            Height="25" 
-                            VerticalContentAlignment="Center" 
-                            Grid.Row="3"/>
-                        <GridSplitter Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Background="#FFACACAC" Grid.Row="3"/>
-
-                        <Label x:Name="label_Form21" Content="Форма 21" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Grid.Row="4"/>
-                        <Image x:Name="image_Form21" Height="75" Margin="10,18,10,0" VerticalAlignment="Top" Grid.Row="4"  RenderOptions.BitmapScalingMode="Fant" Source="/ReinforcementColumnarFoundations;component/Resources/RebarForms/21.png"/>
-                        <ComboBox 
-                            x:Name="comboBox_Form21"
-                            ItemsSource="{Binding RebarShapesList}"
-                            SelectedItem="{Binding Form21, Mode=TwoWay}"
-                            DisplayMemberPath="Name"
-                            Margin="10,87,10,0" 
-                            VerticalAlignment="Top" 
-                            Height="25" 
-                            VerticalContentAlignment="Center" 
-                            Grid.Row="4"/>
-                        <GridSplitter Height="1" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Background="#FFACACAC" Grid.Row="4"/>
-
-                        <Label x:Name="label_RebarHookType" Content="Отгиб арматуры для хомутов" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Grid.Row="5"/>
-                        <Image x:Name="image_RebarHookType" Height="75" Margin="10,18,10,0" VerticalAlignment="Top" Grid.Row="5"  RenderOptions.BitmapScalingMode="Fant" Source="/ReinforcementColumnarFoundations;component/Resources/RebarForms/RebarHookType.png"/>
-                        <ComboBox 
-                            x:Name="comboBox_RebarHookType" 
-                            ItemsSource="{Binding Path=RebarHookTypeList}"
-                            SelectedItem="{Binding SelectedHookType, Mode=TwoWay}"
-                            DisplayMemberPath="Name"
-                            Margin="10,87,10,0" VerticalAlignment="Top"
-                            Grid.Row="5" 
-                            Height="25" 
-                            VerticalContentAlignment="Center"/>
                     </Grid>
                 </Grid>
             </TabItem>

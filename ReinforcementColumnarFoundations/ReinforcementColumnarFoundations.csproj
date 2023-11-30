@@ -106,5 +106,11 @@
   <ItemGroup>
     <Resource Include="Resources\RebarForms\21.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Форма_11.png" />
+    <Resource Include="Resources\Форма_21.png" />
+    <Resource Include="Resources\Форма_26_1.png" />
+    <Resource Include="Resources\Форма_51.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

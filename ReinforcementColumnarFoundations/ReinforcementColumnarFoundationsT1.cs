@@ -57,6 +57,15 @@ namespace ReinforcementColumnarFoundations
                 t.Start("Армирование фундаментов - Тип 1");
                 foreach (FamilyInstance foundation in foundationList)
                 {
+                    //Проверяем и удаляем существующую в фундаменте арматуру
+                    new FilteredElementCollector(doc)
+                        .OfCategory(BuiltInCategory.OST_Rebar)
+                        .WhereElementIsNotElementType()
+                        .Cast<Rebar>()
+                        .Where(r => r.GetHostId() == foundation.Id)
+                        .ToList()
+                        .ForEach(x => doc.Delete(x.Id));
+
                     Foundation foundationProperty = new Foundation(doc, foundation);
                     //Задаем защитный слой арматуры других граней фундамента
                     foundation.get_Parameter(BuiltInParameter.CLEAR_COVER_OTHER).Set(scRebarBarCoverType.Id);
@@ -119,6 +128,7 @@ namespace ReinforcementColumnarFoundations
                         TaskDialog.Show("Revit", "Не удалость создать Г-образный стержень");
                         return Result.Cancelled;
                     }
+
                     //Создание вертикальных стержней
                     try
                     {
@@ -248,7 +258,6 @@ namespace ReinforcementColumnarFoundations
                         TaskDialog.Show("Revit", "Не удалось создать боковое армирование подколонника!");
                         return Result.Cancelled;
                     }
-
 
                     //Армирование подошвы
                     try
@@ -512,9 +521,8 @@ namespace ReinforcementColumnarFoundations
 
                         for (int i = 0; i < 2; i++)
                         {
-                            ElementTransformUtils.CopyElement(doc, MainRebar_1.Id, new XYZ(0, 0, -StepIndirectRebar));
-                            ElementTransformUtils.CopyElement(doc, MainRebar_2.Id, new XYZ(0, 0, -StepIndirectRebar));
-                            StepIndirectRebar += StepIndirectRebar;
+                            ElementTransformUtils.CopyElement(doc, MainRebar_1.Id, new XYZ(0, 0, -StepIndirectRebar * (i + 1)));
+                            ElementTransformUtils.CopyElement(doc, MainRebar_2.Id, new XYZ(0, 0, -StepIndirectRebar * (i + 1)));
                         }
 
                         //Group newRebarGroup = doc.Create.NewGroup(new List<ElementId> { MainRebar_1.Id, MainRebar_2.Id });
@@ -530,25 +538,31 @@ namespace ReinforcementColumnarFoundations
                         TaskDialog.Show("Revit", "Не удалось создать косвенное армирование!");
                         return Result.Cancelled;
                     }
+
                     //Создание хомутов
                     try
                     {
-                        //Точки для построения кривых хомута
-                        XYZ firstStirrup_p1 = new XYZ(Math.Round(foundationProperty.FoundationBasePoint.X - 200 / 304.8, 6)
-                            , Math.Round(foundationProperty.FoundationBasePoint.Y - 200 / 304.8, 6)
-                            , Math.Round(foundationProperty.FoundationBasePoint.Z + 150 / 304.8, 6));
+                        //Расчет размеров линий хомута
 
-                        XYZ firstStirrup_p2 = new XYZ(Math.Round(firstStirrup_p1.X + 400 / 304.8, 6)
+                        double s = Math.Sqrt(Math.Pow(foundationProperty.ColumnLength - 2 * coverDistance + 1.5 * firstMainBarDiam, 2) + Math.Pow(foundationProperty.ColumnWidth - 2 * coverDistance + 1.5 * firstMainBarDiam, 2)) / 2;
+
+                        //Точки для построения кривых хомута
+                        XYZ firstStirrup_p1 =
+                            new XYZ(Math.Round(foundationProperty.FoundationBasePoint.X - s / 2, 6)
+                            , Math.Round(foundationProperty.FoundationBasePoint.Y - s / 2, 6)
+                            , Math.Round(foundationProperty.FoundationBasePoint.Z - 85 / 304.8 + foundationProperty.FoundationLength, 6));
+
+                        XYZ firstStirrup_p2 = new XYZ(Math.Round(firstStirrup_p1.X + s, 6)
                             , Math.Round(firstStirrup_p1.Y, 6)
                             , Math.Round(firstStirrup_p1.Z, 6));
 
                         XYZ firstStirrup_p3 = new XYZ(Math.Round(firstStirrup_p2.X, 6)
-                            , Math.Round(firstStirrup_p2.Y + 200 / 304.8, 6)
-                            , Math.Round(firstStirrup_p2.Z, 6));
+                            , Math.Round(firstStirrup_p2.Y + s, 6)
+                            , Math.Round(firstStirrup_p1.Z, 6));
 
-                        XYZ firstStirrup_p4 = new XYZ(Math.Round(firstStirrup_p3.X - 400 / 304.8, 6)
+                        XYZ firstStirrup_p4 = new XYZ(Math.Round(firstStirrup_p3.X - s, 6)
                             , Math.Round(firstStirrup_p3.Y, 6)
-                            , Math.Round(firstStirrup_p3.Z, 6));
+                            , Math.Round(firstStirrup_p1.Z, 6));
 
                         //Кривые хомута
                         List<Curve> firstStirrupCurves = new List<Curve>();
@@ -563,7 +577,7 @@ namespace ReinforcementColumnarFoundations
                         firstStirrupCurves.Add(firstStirrup_line4);
 
 
-                        Rebar buttonStirrup = Rebar.CreateFromCurvesAndShape(doc
+                        Rebar RebarStirrup = Rebar.CreateFromCurvesAndShape(doc
                             , form51
                             , firstStirrupBarTape
                             , rebarHookTypeForStirrup
@@ -571,8 +585,16 @@ namespace ReinforcementColumnarFoundations
                             , foundation
                             , new XYZ(0, 0, 1)
                             , firstStirrupCurves
-                            , RebarHookOrientation.Right
-                            , RebarHookOrientation.Right);
+                            , RebarHookOrientation.Left
+                            , RebarHookOrientation.Left);
+
+                        ElementTransformUtils.RotateElement(doc, RebarStirrup.Id, rotateLineBase, 45 * (Math.PI / 180));
+                        ElementTransformUtils.RotateElement(doc, RebarStirrup.Id, rotateLineBase, (foundation.Location as LocationPoint).Rotation);
+
+                        RebarStirrup.get_Parameter(BuiltInParameter.REBAR_ELEM_LAYOUT_RULE).Set(3);
+                        RebarStirrup.get_Parameter(BuiltInParameter.REBAR_ELEM_QUANTITY_OF_BARS).Set((int)(foundationProperty.ColumnHeight / (StepLateralRebar / 2)) + 1);
+                        RebarStirrup.get_Parameter(BuiltInParameter.REBAR_ELEM_BAR_SPACING).Set(StepLateralRebar / 2);
+
                     }
                     catch
                     {
