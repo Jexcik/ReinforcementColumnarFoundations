@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\..\..\AppData\Roaming\Autodesk\Revit\Addins\2022\RibbonRAMData\ReinforcementColumnarFoundations\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -55,7 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\AlphanumComparatorFastString.cs" />
-    <Compile Include="App.cs" />
     <Compile Include="Models\Foundation.cs" />
     <Compile Include="Models\FoundationSelectionFilter.cs" />
     <Compile Include="Infrastructure\Commands\Base\Command.cs" />

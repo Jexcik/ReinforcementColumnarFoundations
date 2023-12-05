@@ -388,7 +388,7 @@ namespace ReinforcementColumnarFoundations
                         mainRebarCurves.Clear();
 
                         //Точки для построение П стержней по Y
-                        rebar_p1 = new XYZ(Math.Round(foundationProperty.FoundationBasePoint.X - foundationProperty.Ledge1Length / 2 + 1.5 * bottomMaimBarDiam + coverDistance, 6)
+                        rebar_p1 = new XYZ(Math.Round(foundationProperty.FoundationBasePoint.X + foundationProperty.Ledge1Length / 2 - bottomMaimBarDiam / 2 - coverDistance, 6)
                             , Math.Round(foundationProperty.FoundationBasePoint.Y - foundationProperty.Ledge1Width / 2 + coverDistance + bottomMaimBarDiam / 2, 6)
                             , Math.Round(foundationProperty.FoundationBasePoint.Z + bottomCoverDistance + bottomMaimBarDiam, 6));
 
@@ -427,6 +427,7 @@ namespace ReinforcementColumnarFoundations
                         MainRebar_1.get_Parameter(BuiltInParameter.REBAR_ELEM_LAYOUT_RULE).Set(2);
                         MainRebar_1.get_Parameter(BuiltInParameter.REBAR_ELEM_BAR_SPACING).Set(200 / 304.8);
 
+                        ElementTransformUtils.MoveElement(doc, MainRebar_1.Id, new XYZ(bottomMaimBarDiam, 0, -bottomMaimBarDiam));
                     }
                     catch
                     {
@@ -686,7 +687,7 @@ namespace ReinforcementColumnarFoundations
                         ElementTransformUtils.RotateElement(doc, RebarStirrup.Id, rotateLineBase, (foundation.Location as LocationPoint).Rotation);
 
                         RebarStirrup.get_Parameter(BuiltInParameter.REBAR_ELEM_LAYOUT_RULE).Set(3);
-                        RebarStirrup.get_Parameter(BuiltInParameter.REBAR_ELEM_QUANTITY_OF_BARS).Set((int)(foundationProperty.ColumnHeight / (StepLateralRebar / 2)) + 1);
+                        RebarStirrup.get_Parameter(BuiltInParameter.REBAR_ELEM_QUANTITY_OF_BARS).Set((int)(foundationProperty.ColumnHeight / (StepLateralRebar)) + 1);
                         RebarStirrup.get_Parameter(BuiltInParameter.REBAR_ELEM_BAR_SPACING).Set(StepLateralRebar);
 
                     }
