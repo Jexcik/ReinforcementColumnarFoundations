@@ -298,7 +298,7 @@
                         ItemsSource="{Binding RebarShapesList}"
                         SelectedItem="{Binding Form01, Mode=TwoWay}"
                         DisplayMemberPath="Name"
-                        Margin="83,50,75,0" 
+                        Margin="0,50,0,0" 
                         VerticalAlignment="Top" 
                         Height="25"
                         Width="207.5"
