@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Xml.Linq;
 
 namespace ReinforcementColumnarFoundations.ViewModels
 {
@@ -22,8 +23,6 @@ namespace ReinforcementColumnarFoundations.ViewModels
 
 
         public string SelectedReinforcementTypeButtonName;
-
-        private RebarModel rebarModel;
 
         private ReinforcementView reinforcementView;
         public ReinforcementView _reinforcementView
@@ -112,7 +111,7 @@ namespace ReinforcementColumnarFoundations.ViewModels
 
         public ICommand ButtonType2_Click
         {
-            get 
+            get
             {
                 return new RelayCommand(param => buttonType1_Click(param));
             }
@@ -178,6 +177,17 @@ namespace ReinforcementColumnarFoundations.ViewModels
                 OnPropertyChanged(nameof(IsCheckedUpperReinforce));
             }
         }
+
+        private bool isStops;
+        public bool IsStops
+        {
+            get => isStops;
+            set
+            {
+                isStops = value;
+                OnPropertyChanged(nameof(IsStops));
+            }
+        }
         #endregion
 
         #region ComboBox
@@ -230,6 +240,33 @@ namespace ReinforcementColumnarFoundations.ViewModels
             {
                 form51 = value;
                 OnPropertyChanged(nameof(Form51));
+            }
+        }
+        #endregion
+        #region FamilySymbol
+
+        private FamilySymbol selectedFamilySymbol;
+        public FamilySymbol SelectedFamilySymbol
+        {
+            get => selectedFamilySymbol;
+            set
+            {
+                selectedFamilySymbol = value;
+                OnPropertyChanged(nameof(SelectedFamilySymbol));
+            }
+        }
+
+        private List<FamilySymbol> familySymbolList;
+        public List<FamilySymbol> FamilySymbolList
+        {
+            get => familySymbolList;
+            set
+            {
+                familySymbolList = value
+                    .Where(x => (x.FamilyName.Contains("IFC_Швеллер") || x.FamilyName.Contains("IFC_Двутавр"))
+                    &&
+                    x.Category.Id.IntegerValue.Equals((int)BuiltInCategory.OST_Rebar)).ToList();
+                OnPropertyChanged(nameof(FamilySymbolList));
             }
         }
         #endregion
@@ -720,11 +757,11 @@ namespace ReinforcementColumnarFoundations.ViewModels
 
         public ReinforcementColumnarFoundationsViewModel(Document _doc)
         {
-            rebarModel = new RebarModel();
-            RebarBarTypeList = rebarModel.GetRebarTypes(_doc);
-            RebarCoverTypeList = rebarModel.GetCoverTypes(_doc);
-            RebarShapesList = rebarModel.GetRebarShapes(_doc);
-            RebarHookTypeList = rebarModel.GetRebarHookType(_doc);
+            RebarBarTypeList = RebarModel.GetRebarTypes(_doc);
+            RebarCoverTypeList = RebarModel.GetCoverTypes(_doc);
+            RebarShapesList = RebarModel.GetRebarShapes(_doc);
+            RebarHookTypeList = RebarModel.GetRebarHookType(_doc);
+            FamilySymbolList = RebarModel.GetFamilySymbols(_doc);
 
             CloseWindowCommand = new RelayCommand(CloseWindow, p => true);
             OkCommand = new RelayCommand(OkWindow, p => true);

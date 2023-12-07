@@ -110,6 +110,19 @@
                             </ComboBoxItem>
                         </ComboBox>
 
+                        <ComboBox
+                            VerticalAlignment="Top"
+                            DisplayMemberPath="Name"
+                            ItemsSource="{Binding Path=FamilySymbolList}"
+                            SelectedItem="{Binding Path=SelectedFamilySymbol}"
+                            HorizontalAlignment="Right"
+                            Width="110"
+                            Height="25"
+                            Grid.Column="0"
+                            Grid.Row="0" Margin="0,20,100,0">
+
+                        </ComboBox>
+
                         <ComboBox 
                             x:Name="comboBox_FirstBarTapes" 
                             ItemsSource="{Binding Path=RebarBarTypeList}"
@@ -264,6 +277,16 @@
                             HorizontalAlignment="Left" 
                             Margin="10,0,0,35">
                         </CheckBox>
+
+                        <CheckBox
+                            x:Name="checkBox_Stops"
+                            IsChecked="{Binding IsStops}"
+                            Content="Упоры"
+                            Grid.Row="1"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Left"
+                            Margin="10,0,0,15" 
+                            IsEnabled="False"/>
 
                         <Image 
                             x:Name="image_Sections" 

@@ -16,7 +16,7 @@ namespace ReinforcementColumnarFoundations.Models
         /// </summary>
         /// <param name="doc"></param>
         /// <returns>Возвращает список типов несущей арматуры</returns>
-        public List<RebarBarType> GetRebarTypes(Document doc)
+        public static List<RebarBarType> GetRebarTypes(Document doc)
         {
             return new FilteredElementCollector(doc)
                 .OfClass(typeof(RebarBarType))
@@ -29,8 +29,23 @@ namespace ReinforcementColumnarFoundations.Models
         /// 
         /// </summary>
         /// <param name="doc"></param>
+        /// <returns>Возвращает список типов загружаемых семейств</returns>
+        public static List<FamilySymbol> GetFamilySymbols(Document doc)
+        {
+            return new FilteredElementCollector(doc)
+                .OfClass(typeof(FamilySymbol))
+                .OfCategory(BuiltInCategory.OST_Rebar)
+                .WhereElementIsElementType()
+                .Cast<FamilySymbol>()
+                .ToList();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="doc"></param>
         /// <returns>Возвращает список защитных слоев</returns>
-        public List<RebarCoverType> GetCoverTypes(Document doc)
+        public static List<RebarCoverType> GetCoverTypes(Document doc)
         {
             return new FilteredElementCollector(doc)
             .OfClass(typeof(RebarCoverType))
@@ -45,7 +60,7 @@ namespace ReinforcementColumnarFoundations.Models
         /// </summary>
         /// <param name="doc"></param>
         /// <returns>Возвращает список форм арматуры</returns>
-        public List<RebarShape> GetRebarShapes(Document doc)
+        public static List<RebarShape> GetRebarShapes(Document doc)
         {
             return new FilteredElementCollector(doc)
             .OfClass(typeof(RebarShape))
@@ -59,7 +74,7 @@ namespace ReinforcementColumnarFoundations.Models
         /// </summary>
         /// <param name="doc"></param>
         /// <returns>Возвращает список типов отгибов</returns>
-        public List<RebarHookType> GetRebarHookType(Document doc)
+        public static List<RebarHookType> GetRebarHookType(Document doc)
         {
             return new FilteredElementCollector(doc)
             .OfClass(typeof(RebarHookType))

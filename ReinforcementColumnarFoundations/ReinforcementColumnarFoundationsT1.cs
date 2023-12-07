@@ -17,6 +17,8 @@ namespace ReinforcementColumnarFoundations
         {
             View view = doc.ActiveView;
 
+            FamilySymbol SelectedStop = ViewModel.SelectedFamilySymbol;
+
             RebarBarType firstMainBarType = ViewModel.SelectedFirstRebarType;
             double firstMainBarDiam = firstMainBarType.BarDiameter;
 
@@ -59,12 +61,23 @@ namespace ReinforcementColumnarFoundations
                 {
                     //Проверяем и удаляем существующую в фундаменте арматуру
                     new FilteredElementCollector(doc)
+                        .OfClass(typeof(Rebar))
                         .OfCategory(BuiltInCategory.OST_Rebar)
                         .WhereElementIsNotElementType()
                         .Cast<Rebar>()
                         .Where(r => r.GetHostId() == foundation.Id)
                         .ToList()
                         .ForEach(x => doc.Delete(x.Id));
+
+                    new FilteredElementCollector(doc)
+                        .OfClass(typeof(FamilyInstance))
+                        .WhereElementIsNotElementType()
+                        .Cast<FamilyInstance>()
+                        .Where(x => x.LookupParameter("ADSK_Метка основы") != null
+                        && x.LookupParameter("ADSK_Метка основы").AsString()
+                        == foundation.get_Parameter(BuiltInParameter.ALL_MODEL_MARK).AsString())
+                        .ToList()
+                        .ForEach(f => doc.Delete(f.Id));
 
                     Foundation foundationProperty = new Foundation(doc, foundation);
                     //Задаем защитный слой арматуры других граней фундамента
@@ -76,6 +89,24 @@ namespace ReinforcementColumnarFoundations
                     XYZ rotateBase_p2 = new XYZ(rotateBase_p1.X, rotateBase_p1.Y, rotateBase_p1.Z + 1);
                     Line rotateLineBase = Line.CreateBound(rotateBase_p1, rotateBase_p2);
 
+                    //Создание противоздвиговых упоров
+                    if (ViewModel.IsStops)
+                    {
+                        try
+                        {
+                            doc.Create.NewFamilyInstance(foundationProperty.FoundationBasePoint
+                                , SelectedStop
+                                , StructuralType.NonStructural)
+                                .LookupParameter("ADSK_Метка основы")
+                                .Set(foundation.get_Parameter(BuiltInParameter.ALL_MODEL_MARK)
+                                .AsString());
+                        }
+                        catch
+                        {
+                            TaskDialog.Show("Revit", "Не удалось создать противоздвиговые упоры!");
+                            return Result.Cancelled;
+                        }
+                    }
 
                     Rebar MainRebar_1 = null;
                     //Создание вертикальных стержней по Y
