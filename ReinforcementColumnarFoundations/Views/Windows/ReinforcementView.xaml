@@ -387,7 +387,7 @@
                         Grid.Column="1"
                         x:Name="image_Form11" 
                         Height="75" 
-                        Margin="10,210,10,0" 
+                        Margin="10,217,10,0" 
                         VerticalAlignment="Top" 
                         RenderOptions.BitmapScalingMode="Fant" Source="/ReinforcementColumnarFoundations;component/Resources/Форма_11.png" 
                         />
