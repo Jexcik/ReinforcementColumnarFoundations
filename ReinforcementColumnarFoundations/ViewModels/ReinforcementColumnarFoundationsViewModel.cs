@@ -1,6 +1,7 @@
 ﻿using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Structure;
 using Autodesk.Revit.UI;
+using Microsoft.Win32;
 using ReinforcementColumnarFoundations.Infrastructure.Commands;
 using ReinforcementColumnarFoundations.Models;
 using ReinforcementColumnarFoundations.ViewModels.Base;
@@ -114,6 +115,17 @@ namespace ReinforcementColumnarFoundations.ViewModels
             get
             {
                 return new RelayCommand(param => buttonType1_Click(param));
+            }
+        }
+
+        public ICommand LoadCommand => new RelayCommand(LoadCommandClick);
+
+        private void LoadCommandClick(object sender)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() != true)
+            {
+                return;
             }
         }
 
@@ -750,10 +762,6 @@ namespace ReinforcementColumnarFoundations.ViewModels
                 //        textBox_CountY.Text = ReinforcementColumnarFoundationsSettingsT1Item.CountY.ToString();
             }
         }
-
-
-
-
 
         public ReinforcementColumnarFoundationsViewModel(Document _doc)
         {
